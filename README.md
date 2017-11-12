@@ -1,0 +1,2 @@
+# CareHack
+Elimination Round Challenge

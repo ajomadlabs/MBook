@@ -1,6 +1,7 @@
 // Defining different Routes
 
 const User = require('../models/user');
+const Hosp = require('../models/hospitals');
 
 module.exports = function(app, passport) {
 
@@ -15,12 +16,6 @@ module.exports = function(app, passport) {
     // Profile Route
 
     app.get('/profile', isLoggedIn, async function(req, res) {
-
-        // res.render('profile.ejs', {
-
-        //     user: req.user
-
-        // });
 
         try {
 
@@ -42,7 +37,13 @@ module.exports = function(app, passport) {
 
     // Hospital Search Route
 
-    app.get('/search', function(req, res) {})
+    app.get('/search', function(req, res) {
+
+        // @TODO: Search Hospital Functionality
+    
+    });
+
+
 
     // Google OAuth Route
 

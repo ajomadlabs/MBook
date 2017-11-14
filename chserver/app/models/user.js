@@ -1,15 +1,31 @@
-// Defining the Schema
+7// Defining the User Schema
 
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
 
-    googlelogin: {
+    user: {
         
         id: String,
         token: String,
         email: String,
-        name: String
+        name: String,
+        curappoint: [{
+
+            hospname: String,
+            doctor: String,
+            dept: String,
+            time: String
+        
+        }],
+        preappoint: [{
+
+            hospname: String,
+            doctor: String,
+            dept: String,
+            time: String
+            
+        }]
                 
     }
 

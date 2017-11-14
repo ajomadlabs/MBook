@@ -2,6 +2,6 @@
 
 module.exports = {
 
-    'url': "mongodb://ajo:ajo123@ds042677.mlab.com:42677/mlbook"
+    'url': "mongodb://ajo:ajo123@ds042527.mlab.com:42527/carehack"
 
 }

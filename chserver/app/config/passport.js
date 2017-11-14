@@ -48,7 +48,7 @@ module.exports = function(passport) {
                         const newUser = new User();
 
                         newUser.locallogin.username = email;
-                        newUser.locallogin.password = password;
+                        newUser.locallogin.password = newUser.generateHash(password);
 
                         newUser.save(function(err) {
 
@@ -99,7 +99,7 @@ module.exports = function(passport) {
 
                 }
 
-                if (user.locallogin.password != password) {
+                if (!user.validPassword(password)) {
 
                     return done(null, false, req.flash('loginMessage', "Incorrect mail or password"));
 

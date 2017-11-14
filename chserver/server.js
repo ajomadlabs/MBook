@@ -1,49 +1,51 @@
-// Requiring all the files
+// Importing all the modules
 
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const mongoClient = require('mongodb').MongoClient;
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const flash = require('connect-flash');
+const port = process.env.PORT || 8081;
+const db = require('./app/config/db');
 
-// Defining the port
-
-const port = 8081;
-
-// Defining the app
+// Defining the App
 
 const app = express();
 
-// Defining the db
+// Defining the middlewares
 
-const db = require('./app/config/config.js');
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({
 
-// Definig Body Parser
+    extended: true
 
-app.use(bodyParser.urlencoded({ extended: true }));
+}));
+app.use(session({
 
-// Definig the MongoClient
+    secret: "anystring",
+    saveUninitialized: true,
+    resave: true
 
-mongoClient.connect(db.url, (err, database) => {
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
-    if (err) return console.log(err);
+// Importing passport Configuration
 
-    // Defining Routes
+require('./app/config/passport')(passport);
 
-    require('./app/routes')(app, database);
+// Defining Mongoose
 
-    // Listening to port
+mongoose.connect(db.url);
 
-    app.listen(port, () => {
+// Importing the routes
 
-        console.log(' Server Started on ' + port);
+require('./app/routes/index')(app, passport);
 
-    });
-});
+// Running Server
 
-// Testing 
-
-// require('./app/routes')(app, {});
-// app.listen(port, () => {
-
-//     console.log('Server Started on ' + port);
-    
-// })
+app.listen(port);
+console.log("Server Started on " + port);

@@ -48,33 +48,17 @@ module.exports = function(app, passport) {
 
     });
 
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
+    
+    app.get('/auth/facebook/callback', 
+        passport.authenticate('facebook', {   successRedirect: '/profile',
+                                              failureRedirect: '/' }));
+    
+
     app.get('/logout', function(req, res) {
 
         req.logout();
         res.redirect('/');
-
-    });
-
-    app.get('/:username/:password', function(req, res) {
-
-        const newUser = new User();
-
-        newUser.locallogin.username = req.params.username;
-        newUser.locallogin.password = req.params.password;
-
-        console.log(newUser.locallogin.username + " " + newUser.locallogin.password);
-
-        newUser.save(function(err) {
-
-            if (err) {
-
-                throw err;
-
-            }
-
-        });
-
-        res.send("Success !");
 
     });
 };

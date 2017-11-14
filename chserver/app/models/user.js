@@ -9,6 +9,15 @@ const userSchema = mongoose.Schema({
         username: String,
         password: String
 
+    },
+
+    facebooklogin: {
+
+        id: String,
+        token: String,
+        email: String,
+        name: String
+        
     }
 
 });

@@ -33,6 +33,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.set('views', './app/views');
+app.set('view engine', 'ejs');
 
 // Importing passport Configuration
 

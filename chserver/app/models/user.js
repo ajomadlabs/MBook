@@ -1,4 +1,4 @@
-// Defininf the Schema
+// Defining the Schema
 
 const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({

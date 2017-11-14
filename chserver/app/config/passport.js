@@ -17,16 +17,70 @@ module.exports = function(passport) {
             done(err, user);
 
         });
-
     });
 
     passport.use('local-signup', new localStratergy({
 
         usernameField: 'email',
         passwordField: 'password',
-        passRedToCallback: true
+        passReqToCallback: true
+
     },
-    
+
+    function(req, email, password, done) {
+
+        process.nextTick(function() {
+
+                User.findOne({'locallogin.username': email}, function(err, user) {
+
+                    if (err) {
+
+                        return done(err);
+                    }
+
+                    if (user) {
+
+                        return done(null, false, req.flash('signupMessage', "That email is already taken"));
+                    }
+
+                    else {
+
+                        const newUser = new User();
+
+                        newUser.locallogin.username = email;
+                        newUser.locallogin.password = password;
+
+                        newUser.save(function(err) {
+
+                            if (err) {
+
+                                throw err;
+                            }
+
+                            else {
+
+                                return done(null, newUser);
+
+                            }
+
+                        });
+                    }
+
+                });
+        });
+
+    }
+
+    ));
+
+    passport.use('local-login', new localStratergy({
+
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true
+
+    },
+
     function(req, email, password, done) {
 
         process.nextTick(function() {
@@ -39,84 +93,24 @@ module.exports = function(passport) {
 
                 }
 
-                if (user) {
-
-                    return done(null, false, req.flash('signupMessage', "This email already taken"));
-                }
-
-                else {
-
-                    const newUser = new User();
-
-                    newUser.locallogin.username = email;
-                    newUser.locallogin.password = password;
-
-                    newUser.save(function(err) {
-
-                        if (err) {
-
-                            throw err;
-
-                        }
-
-                        else {
-
-                            return done(null, newUser);
-
-                        }
-
-                    });
-
-                }
-
-            });
-
-        });
-
-    }
-
-    ));
-
-    passport.use('local-login', new localStratergy({
-
-        usernameField: 'email',
-        passwordField: 'password',
-        passRedToCallback: true
-
-    },
-
-    function(req, email, password, done) {
-
-        process.nextTick(function() {
-
-            User.findOne({'locallogin.username': email}, function(err) {
-
-                if (err) {
-
-                    return done(err);
-
-                }
-
                 if (!user) {
 
-                    return done(null, false, req.flash('loginMessage', "Not a registered user"));
-                
+                    return done(null, false, req.flash('loginMessage', "Not a registered User"));
+
                 }
 
                 if (user.locallogin.password != password) {
 
-                    return done(null, false, req.flash('loginMessage', "Invalid credentials"));
+                    return done(null, false, req.flash('loginMessage', "Incorrect mail or password"));
 
                 }
 
                 return done(null, user);
 
             });
-
+        
         });
-
     }
 
     ));
-    
 }

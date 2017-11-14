@@ -1,41 +1,25 @@
 {
-  "name": "chserver",
+  "name": "carehack",
   "version": "1.0.0",
-  "description": "Server of Carehack",
-  "main": "index.js",
+  "description": "Hospital Appointment Booking System",
+  "main": "server.js",
   "scripts": {
     "test": "testme",
     "dev": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ajomadlabs/CareHack.git"
-  },
-  "keywords": [
-    "CareHack",
-    "Hospital",
-    "Appointment"
-  ],
   "author": "ajojohn",
   "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/ajomadlabs/CareHack/issues"
-  },
-  "homepage": "https://github.com/ajomadlabs/CareHack#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "body-parser": "latest",
     "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.3",
-    "ejs": "^2.5.7",
+    "cookie-parser": "latest",
+    "ejs": "latest",
     "express": "^4.16.2",
-    "express-session": "^1.15.6",
-    "mongodb": "^2.2.33",
-    "mongoose": "^4.13.2",
+    "express-session": "latest",
+    "mongoose": "latest",
     "morgan": "^1.9.0",
+    "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.12.1"
   }
 }

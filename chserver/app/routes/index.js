@@ -4,56 +4,58 @@ const User = require('../models/user');
 
 module.exports = function(app, passport) {
 
+    // Default Route
+
     app.get('/', function(req, res) {
 
         res.render('index.ejs');
 
     });
 
-    app.get('/signup', function(req, res) {
+    // Profile Route
 
-        res.render('signup.ejs', { message: req.flash('signupMessage') });
+    app.get('/profile', isLoggedIn, async function(req, res) {
 
-    });
+        // res.render('profile.ejs', {
 
-    app.post('/signup', passport.authenticate('local-signup', {
+        //     user: req.user
 
-        successRedirect: '/',
-        failureRedirect: '/signup',
-        failureFlash: true
+        // });
 
-    }));
+        try {
 
-    app.get('/login', function(req, res) {
+            const user = await req.user;
+            res.send(user.toJSON());
+            //console.log(user);
 
-        res.render('login.ejs', {message: req.flash('loginMessage')});
+        } catch (err) {
 
-    });
+            res.status(400).send({
 
-    app.post('/login', passport.authenticate('local-login', {
+                error: "Something Went Wrong"
 
-        successRedirect: '/profile',
-        failureRedirect: '/login',
-        failureFlash: true
+            });
 
-    }));
-
-    app.get('/profile', isLoggedIn, function(req, res) {
-
-        res.render('profile.ejs', {
-
-            user: req.user
-
-        });
+        }
 
     });
 
-    app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
+    // Hospital Search Route
+
+    app.get('/search', function(req, res) {})
+
+    // Google OAuth Route
+
+    app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+    app.get('/auth/google/callback', passport.authenticate('google', {   
+                
+            successRedirect: '/profile',
+            failureRedirect: '/' 
+        }
+            
+    ));
     
-    app.get('/auth/facebook/callback', 
-        passport.authenticate('facebook', {   successRedirect: '/profile',
-                                              failureRedirect: '/' }));
-    
+    // Logout Route
 
     app.get('/logout', function(req, res) {
 
@@ -61,7 +63,10 @@ module.exports = function(app, passport) {
         res.redirect('/');
 
     });
+
 };
+
+// Function to check if LoggedIn
 
 function isLoggedIn(req, res, next) {
 
@@ -73,7 +78,7 @@ function isLoggedIn(req, res, next) {
 
     else {
 
-        res.redirect('/login');
+        res.redirect('/');
         
     }
 

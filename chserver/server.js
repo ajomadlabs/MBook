@@ -16,17 +16,13 @@ const app = express();
 
 // Defining the port 
 
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8080;
 
 // Defining the middlewares
 
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({
-
-    extended: true
-
-}));
+app.use(bodyParser.json());
 app.use(session({
 
     secret: "anyString",
@@ -46,19 +42,6 @@ require('./app/config/passport')(passport);
 // Defining Mongoose
 
 mongoose.connect(db.url);
-
-
-// Response to client
-
-// app.use('/', function(req, res) {
-
-//     res.send("Hello, World");
-    
-//     console.log(req.cookies);
-//     console.log("================");
-//     console.log(req.session);
-
-// });
 
 // Defining Routes
 

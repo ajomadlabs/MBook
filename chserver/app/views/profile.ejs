@@ -1,5 +1,5 @@
 <!-- views/profile.ejs -->
-<!doctype html>
+<!Doctype html>
 <html>
 <head>
 	<title>Node Authentication</title>
@@ -18,46 +18,17 @@
 	</div>
 
 	<div class="row">
-
-		<!-- LOCAL INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3><span class="fa fa-user"></span> Local</h3>
-
-					<p>
-						<strong>id</strong>: <%= user._id %><br>
-						<strong>email</strong>: <%= user.locallogin.username %><br>
-						<strong>password</strong>: <%= user.locallogin.password %>
-					</p>
-
-			</div>
-		</div>
-
-		 <!-- FACEBOOK INFORMATION -->
-		 <!-- <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-
-                <p>
-                    <strong>id</strong>: <%= user.facebook.id %><br>
-                    <strong>token</strong>: <%= user.facebook.token %><br>
-                    <strong>email</strong>: <%= user.facebook.email %><br>
-                    <strong>name</strong>: <%= user.facebook.name %>
-                </p>
-
-            </div>
-		</div> -->
-
+		
 		<!-- GOOGLE INFORMATION -->
 		<div class="col-sm-6">
             <div class="well">
-                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+                <h3 class="text-primary"><i class="fa fa-google" aria-hidden="true"></i>GOOGLE</h3>
 
                 <p>
-                    <strong>id</strong>: <%= user.google.id %><br>
-                    <strong>token</strong>: <%= user.google.token %><br>
-                    <strong>email</strong>: <%= user.google.email %><br>
-                    <strong>name</strong>: <%= user.google.name %>
+                    <strong>id</strong>: <%= user.googlelogin.id %><br>
+                    <strong>token</strong>: <%= user.googlelogin.token %><br>
+                    <strong>email</strong>: <%= user.googlelogin.email %><br>
+                    <strong>name</strong>: <%= user.googlelogin.name %>
                 </p>
 
             </div>

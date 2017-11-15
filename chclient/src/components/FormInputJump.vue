@@ -7,12 +7,12 @@
 
 <script>
   export default {
-    props: ['type', 'name', 'text'],
+    props: ['type', 'name', 'textr'],
     data () {
       return {
         typer: this.type,
         namer: this.name,
-        text: this.text
+        text: this.textr
       }
     }
   }

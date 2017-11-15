@@ -7,7 +7,7 @@
 <script>
 export default {
   props: ['msg'],
-  name: 'Mad Button',
+  name: 'MadButton',
   data () {
     return {}
   }

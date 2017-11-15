@@ -15,7 +15,7 @@
             </div>
             <div class="listbox">
                 <ul>
-                    <li class="listitems" v-for="item in hospitallist"><a>{{item.name}}</a></li>
+                    <li class="listitems" v-for="item in hospitallist"><a v-on:click="load(item.name)">{{item.name}}</a></li>
                 </ul>
             </div>
 
@@ -54,9 +54,16 @@ export default {
           name: 'Aster fse Medcity',
           address: 'Kochi Kerala'
         }
-      ]
+      ],
+      nameSelect: null
+    }
+  },
+  methods: {
+    load: function (a) {
+      this.nameSelect = a
     }
   }
+
 }
 </script>
 

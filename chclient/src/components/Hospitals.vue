@@ -5,7 +5,10 @@
                 <div class="row imp-padding">
                     <form>
                         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <FormInput v-bind:type="textOne" v-bind:name="nameOne" v-bind:text="text"></FormInput>
+                            <div class="input-field">
+                                <input v-model="message" type="text" name="search" id="field" class="inputText" />
+                                <label for="field">{{ text }}</label>
+                            </div>
                             <div class="mb" v-on:click="hosp" v-on:keyup.enter="hosp">
                                 <MadButton v-bind:msg="Msg"></MadButton>
                             </div>
@@ -34,9 +37,9 @@ export default {
   },
   data () {
     return {
-      textOne: 'text',
-      nameOne: 'search',
       Msg: 'Search',
+      val: null,
+      message: null,
       text: 'Enter Hospital\'s name or Doctor\'s name',
       hospitallist: [
         {
@@ -65,9 +68,9 @@ export default {
     },
     hosp: function () {
       try {
-        console.log('Hello')
+        console.log(this.message)
         const response = HospitalService.hospital({
-          hospital: this.nameOne
+          hospital: this.message
         })
         console.log(response)
       } catch (error) {
@@ -81,6 +84,52 @@ export default {
 </script>
 
 <style scoped>
+.input-field{
+  position: relative;
+  width: 100%;
+     
+}
+
+label{
+  position: absolute;
+  left: 0;
+  top: 20px;
+  width: 100%;
+  color: #3b2577;
+  transition: 0.2s all;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
+  cursor: text;  
+}
+
+input {
+  width: 100%;
+  padding: 16px 20px 4px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  border: none;
+  outline: 0;
+  border-bottom: 3px solid #3b2577;
+  font-size: 1.5em;
+  color: #3b2577;
+}
+
+
+.primary-color{
+    color: #3b2577;
+}
+
+input:focus {
+  border-color: #ffcc00;
+}
+input:focus~label {
+  top: 0px;
+  color: #ffcc00;
+  font-size: 1em;
+}
 
 .fluidblock{
     display: block;

@@ -12,7 +12,8 @@
       return {
         typer: this.type,
         namer: this.name,
-        text: this.textr
+        text: this.textr,
+        value: null
       }
     }
   }

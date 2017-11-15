@@ -15,7 +15,9 @@ const userSchema = mongoose.Schema({
             hospname: String,
             doctor: String,
             dept: String,
-            time: String
+            time: String,
+            verified: false,
+            otp: Number
         
         }],
         preappoint: [{
@@ -24,7 +26,7 @@ const userSchema = mongoose.Schema({
             doctor: String,
             dept: String,
             time: String
-            
+
         }]
                 
     }

@@ -35,7 +35,7 @@ module.exports = function(passport) {
 
 	    	process.nextTick(function() {
 
-	    		User.findOne({'googlelogin.id': profile.id}, function(err, user) {
+	    		User.findOne({'user.id': profile.id}, function(err, user) {
 
 	    			if (err) {
 
@@ -51,10 +51,10 @@ module.exports = function(passport) {
 	    			else {
 
 	    				var newUser = new User();
-	    				newUser.googlelogin.id = profile.id;
-	    				newUser.googlelogin.token = accessToken;
-	    				newUser.googlelogin.name = profile.displayName;
-	    				newUser.googlelogin.email = profile.emails[0].value;
+	    				newUser.user.id = profile.id;
+	    				newUser.user.token = accessToken;
+	    				newUser.user.name = profile.displayName;
+	    				newUser.user.email = profile.emails[0].value;
 
 	    				newUser.save(function(err) {
 

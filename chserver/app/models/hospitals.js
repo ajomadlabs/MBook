@@ -1,4 +1,4 @@
-7// Defining the Hospital Schema
+// Defining the Hospital Schema
 
 const mongoose = require('mongoose');
 
@@ -14,7 +14,13 @@ const hospitalSchema = mongoose.Schema({
                     
                     docname: String,
                     doctime: String,
-                    doctokens: Number
+                    doctokens: Number,
+                    docdate: [{
+
+                        date: Date,
+                        token: Number
+
+                    }]
 
                 }]
 
@@ -24,4 +30,4 @@ const hospitalSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Hosp', hospSchema);
+module.exports = mongoose.model('Hosp', hospitalSchema);

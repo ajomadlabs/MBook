@@ -17,6 +17,7 @@
     "ejs": "latest",
     "express": "^4.16.2",
     "express-session": "latest",
+    "mongodb": "^2.2.33",
     "mongoose": "latest",
     "morgan": "^1.9.0",
     "nodemon": "^1.12.1",

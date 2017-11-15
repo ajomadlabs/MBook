@@ -152,7 +152,7 @@ module.exports = function (app, passport) {
 
                         notokens: doctortokens,
                         docdate: doctordate
-                        
+
                     }
                     res.send(appointdetails);
 
@@ -192,8 +192,8 @@ module.exports = function (app, passport) {
     }));
     app.get('/auth/google/callback', passport.authenticate('google', {
 
-            successRedirect: '/profile',
-            failureRedirect: '/'
+            successRedirect: 'http://localhost:8081/home',
+            failureRedirect: 'http://localhost:8081'
         }
 
     ));

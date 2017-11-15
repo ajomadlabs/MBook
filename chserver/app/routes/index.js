@@ -137,9 +137,34 @@ module.exports = function (app, passport) {
         // @TODO: Appointment Date Search Functionality
         try {
 
+            const userHosp = await req.body;
+            Hosp.aggregate([
+
+                {"$match":{"hospname":userHosp.hospital}},
+                {"$unwind":"$dept"},
+                {"$match":{"dept.deptname":userHosp.department}},
+                {"$unwind":"$dept.doctor"},
+                {"$match":{"dept.doctor.docname":userHosp.docname}}], function(err, hosp) {
+
+                    const doctordate = hosp[0].dept.doctor.docdate;
+                    const doctortokens = hosp[0].dept.doctor.doctokens;
+                    const appointdetails = {
+
+                        notokens: doctortokens,
+                        docdate: doctordate
+                        
+                    }
+                    res.send(appointdetails);
+
+            })
 
         } catch (err) {
 
+            res.status(400).send({
+                
+                error: "Doctor Not Found"
+                
+            });
 
         }
 

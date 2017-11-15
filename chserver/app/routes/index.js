@@ -3,11 +3,11 @@
 const User = require('../models/user');
 const Hosp = require('../models/hospitals');
 
-module.exports = function(app, passport) {
+module.exports = function (app, passport) {
 
     // Default Route
 
-    app.get('/', function(req, res) {
+    app.get('/', function (req, res) {
 
         res.render('index.ejs');
 
@@ -15,7 +15,7 @@ module.exports = function(app, passport) {
 
     // Profile Route
 
-    app.get('/profile', isLoggedIn, async function(req, res) {
+    app.get('/profile', isLoggedIn, async function (req, res) {
 
         try {
 
@@ -37,16 +37,42 @@ module.exports = function(app, passport) {
 
     // Hospital Search Route
 
-    app.post('/hospital', async function(req, res) {
+    app.post('/hospital', async function (req, res) {
 
         // @TODO: Search Hospital Functionality
         try {
 
             const userHosp = await req.body;
             console.log(userHosp)
-            Hosp.find({'hospname': "KIMS"}, function(err, hosp) {
+           
+            // Hosp.create({
+            //     hospname: "MIMS",
+            //     dept: [{
+            //         deptname: "Test dept",
+            //         doctor: [{
+            //             docname: "testdoc",
+            //             doctime: "10 - 4",
+            //             doctokens: 50,
+            //             docdate: [{
+            //                 date: "test",
+            //                 token: "test",
+            //             }]
+            //         }]
+            //     }]
+            // },function(err,data){
+            //     console.log(err)
+            //     console.log(data)
+            // })
+            // Hosp.findOne( function (err, data) {
+            //     console.log("error",err)
+            //     console.log(data)
+            // })
+            Hosp.find({
+                'hospname': 'KIMS'
+            }, function (err, hosp) {
 
                 //console.log('Test');
+                console.log(hosp)
                 res.send(hosp);
 
             });
@@ -64,7 +90,7 @@ module.exports = function(app, passport) {
 
     // Department Search Route
 
-    app.post('/department', async function(req, res) {
+    app.post('/department', async function (req, res) {
 
         // @TODO: Department Search Functionality
 
@@ -81,7 +107,7 @@ module.exports = function(app, passport) {
 
     // Doctor Search Route
 
-    app.post('/doctor', async function(req, res) {
+    app.post('/doctor', async function (req, res) {
 
         // @TODO: Doctore Search Functionality
         try {
@@ -96,13 +122,13 @@ module.exports = function(app, passport) {
 
     // Appointment Search Route
 
-    app.post('/appoint', async function(req, res) {
+    app.post('/appoint', async function (req, res) {
 
         // @TODO: Appointment Date Search Functionality
         try {
 
 
-        } catch(err) {
+        } catch (err) {
 
 
         }
@@ -111,7 +137,7 @@ module.exports = function(app, passport) {
 
     // View Appointment Route 
 
-    app.post('/view', async function(req, res) {
+    app.post('/view', async function (req, res) {
 
         // @TODO: View Appointment Functionality
         try {
@@ -126,18 +152,20 @@ module.exports = function(app, passport) {
 
     // Google OAuth Route
 
-    app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
-    app.get('/auth/google/callback', passport.authenticate('google', {   
-                
+    app.get('/auth/google', passport.authenticate('google', {
+        scope: ['profile', 'email']
+    }));
+    app.get('/auth/google/callback', passport.authenticate('google', {
+
             successRedirect: '/profile',
-            failureRedirect: '/' 
+            failureRedirect: '/'
         }
-            
+
     ));
-    
+
     // Logout Route
 
-    app.get('/logout', function(req, res) {
+    app.get('/logout', function (req, res) {
 
         req.logout();
         res.redirect('/');
@@ -154,12 +182,10 @@ function isLoggedIn(req, res, next) {
 
         return next();
 
-    }
-
-    else {
+    } else {
 
         res.redirect('/');
-        
+
     }
 
 }

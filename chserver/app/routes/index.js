@@ -46,7 +46,7 @@ module.exports = function (app, passport) {
             const userHosp = await req.body;
             console.log(userHosp);
 
-            Hosp.find({'hospname': {$regex:'^' + userHosp.hospital}},{'hospname':1}, function (err, hosp) {
+            Hosp.find({'hospname': {$regex:'^' + userHosp.hospital + '','$options' : 'i'}},{'hospname':1}, function (err, hosp) {
 
                 const deptmnt = hosp;
                 // console.log(hosp._doc);
@@ -69,29 +69,29 @@ module.exports = function (app, passport) {
 
     app.post('/hospital', async function (req, res) {
         
-                // @TODO: Search Hospital Functionality
-                
-                try {
+        // @TODO: Search Hospital Functionality
         
-                    const userHosp = await req.body;
-                    console.log(userHosp);
-        
-                    Hosp.find({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
-        
-                        const deptmnt = hosp;
-                        // console.log(hosp._doc);
-                        res.send(deptmnt);
-        
-                    });
-        
-                } catch (err) {
-        
-                    res.status(400).send({
-        
-                        error: "Hospital Not Found"
-        
-                    });
-                }
+        try {
+
+            const userHosp = await req.body;
+            console.log(userHosp);
+
+            Hosp.find({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
+
+                const deptmnt = hosp;
+                // console.log(hosp._doc);
+                res.send(deptmnt);
+
+            });
+
+        } catch (err) {
+
+            res.status(400).send({
+
+                error: "Hospital Not Found"
+
+            });
+        }
         
     });
 

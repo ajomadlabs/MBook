@@ -59,7 +59,7 @@ export default {
         this.nameHosp = (await HospitalService.hospital({
           hospital: nameSelect
         })).data
-        console.log(this.nameHosp[0].dept[0].deptname)
+        console.log(this.nameHosp[0].dept[1].deptname)
       } catch (error) {
         this.error = error.response.data.error
       }

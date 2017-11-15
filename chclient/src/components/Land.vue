@@ -11,16 +11,23 @@
       </svg>
     </div>
     <div class="">
-      <router-link to="/welcome"><h3 class="lato primarycolor align"><span class="bold">Sign in</span> with Google</h3></router-link>
+      <!--<router-link to="/welcome"><h3 class="lato primarycolor align"><span class="bold">Sign in</span> with Google</h3></router-link>-->
+      <h3 class="lato primarycolor align" v-on:click="login"><span class="bold">Sign in</span> with Google</h3>
     </div>
   </div>
 </template>
 
 <script>
+// import LoginService from '@/services/LoginService'
 export default {
   name: 'Main Page',
   data () {
     return {
+    }
+  },
+  methods: {
+    login () {
+      window.location = 'http://localhost:8080/auth/google'
     }
   }
 }

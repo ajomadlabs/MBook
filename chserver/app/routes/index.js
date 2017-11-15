@@ -35,9 +35,9 @@ module.exports = function (app, passport) {
 
     });
 
-    // Hospital Search Route
+    // Search Route
 
-    app.post('/hospital', async function (req, res) {
+    app.post('/search', async function (req, res) {
 
         // @TODO: Search Hospital Functionality
         
@@ -46,7 +46,7 @@ module.exports = function (app, passport) {
             const userHosp = await req.body;
             console.log(userHosp);
 
-            Hosp.findOne({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
+            Hosp.find({'hospname': {$regex:'^' + userHosp.hospital}},{'hospname':1}, function (err, hosp) {
 
                 const deptmnt = hosp;
                 // console.log(hosp._doc);
@@ -63,6 +63,36 @@ module.exports = function (app, passport) {
             });
         }
 
+    });
+
+    // Hospital Search Route
+
+    app.post('/hospital', async function (req, res) {
+        
+                // @TODO: Search Hospital Functionality
+                
+                try {
+        
+                    const userHosp = await req.body;
+                    console.log(userHosp);
+        
+                    Hosp.find({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
+        
+                        const deptmnt = hosp;
+                        // console.log(hosp._doc);
+                        res.send(deptmnt);
+        
+                    });
+        
+                } catch (err) {
+        
+                    res.status(400).send({
+        
+                        error: "Hospital Not Found"
+        
+                    });
+                }
+        
     });
 
     // Department Search Route

@@ -3,24 +3,27 @@
         
             <div class="container-fluid fluidblock">
                 <div class="row imp-padding">
-                    <form>
+                    <form v-on:submit.prevent>
                         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="input-field">
                                 <input v-model="message" type="text" name="search" id="field" class="inputText" />
                                 <label for="field">{{ text }}</label>
                             </div>
-                            <div class="mb" v-on:click="hosp" v-on:keyup.enter="hosp">
-                                <MadButton v-bind:msg="Msg"></MadButton>
+                            <div class="mb" v-on:click="searchosp" v-on:keyup.enter="searchosp">
+                                
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            
             <div class="listbox">
                 <ul>
-                    <li class="listitems" v-for="item in hospitallist"><a v-on:click="load(item.name)">{{item.name}}</a></li>
+                    
+                    <li class="listitems" v-for="item in hospitallist"><a v-on:click="hosp(item.hospname)">{{item.hospname}}</a></li>
                 </ul>
             </div>
+            
 
     </div>
 </template>
@@ -41,40 +44,35 @@ export default {
       val: null,
       message: null,
       text: 'Enter Hospital\'s name or Doctor\'s name',
-      hospitallist: [
-        {
-          name: 'Aster Medcity',
-          address: 'Kochi Kerala'
-        },
-        {
-          name: 'Asterasd Medcity',
-          address: 'Kochi Kerala'
-        },
-        {
-          name: 'Aster dsdMedcity',
-          address: 'Kochi Kerala'
-        },
-        {
-          name: 'Aster fse Medcity',
-          address: 'Kochi Kerala'
-        }
-      ],
-      nameSelect: null
+      hospitallist: null,
+      nameSelect: null,
+      nameHosp: null
     }
   },
   methods: {
     load: function (a) {
       this.nameSelect = a
+      console.log(this.nameSelect)
     },
-    hosp: function () {
+    hosp: async function (nameSelect) {
       try {
-        console.log(this.message)
-        const response = HospitalService.hospital({
-          hospital: this.message
-        })
-        console.log(response)
+        this.nameHosp = (await HospitalService.hospital({
+          hospital: nameSelect
+        })).data
+        console.log(this.nameHosp[0].dept[0].deptname)
       } catch (error) {
-        console.log('HE')
+        this.error = error.response.data.error
+      }
+    }
+  },
+  computed: {
+    searchosp: async function () {
+      try {
+        this.hospitallist = (await HospitalService.search({
+          hospital: this.message
+        })).data
+      } catch (error) {
+        console.log(error)
         this.error = error.response.data.error
       }
     }

@@ -40,40 +40,16 @@ module.exports = function (app, passport) {
     app.post('/hospital', async function (req, res) {
 
         // @TODO: Search Hospital Functionality
+
         try {
 
             const userHosp = await req.body;
-            console.log(userHosp)
-           
-            // Hosp.create({
-            //     hospname: "MIMS",
-            //     dept: [{
-            //         deptname: "Test dept",
-            //         doctor: [{
-            //             docname: "testdoc",
-            //             doctime: "10 - 4",
-            //             doctokens: 50,
-            //             docdate: [{
-            //                 date: "test",
-            //                 token: "test",
-            //             }]
-            //         }]
-            //     }]
-            // },function(err,data){
-            //     console.log(err)
-            //     console.log(data)
-            // })
-            // Hosp.findOne( function (err, data) {
-            //     console.log("error",err)
-            //     console.log(data)
-            // })
-            Hosp.find({
-                'hospname': 'KIMS'
-            }, function (err, hosp) {
 
-                //console.log('Test');
-                console.log(hosp)
-                res.send(hosp);
+            Hosp.findOne({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
+
+                const deptmnt = hosp;
+                console.log(hosp._doc);
+                res.send(deptmnt);
 
             });
 
@@ -96,10 +72,26 @@ module.exports = function (app, passport) {
 
         try {
 
+            const userHosp = await req.body;
+            Hosp.aggregate([
 
+                {"$match":{"hospname":userHosp.hospital}},
+                {"$unwind":"$dept"},
+                {"$match":{"dept.deptname":userHosp.department}}], function (err, hosp) {
+
+                const doctors = hosp;
+                console.log(hosp._doc);
+                res.send(doctors);
+
+            });
 
         } catch (err) {
 
+            res.status(400).send({
+                
+                error: "Department Not Found"
+                
+            });
 
         }
 
@@ -112,9 +104,27 @@ module.exports = function (app, passport) {
         // @TODO: Doctore Search Functionality
         try {
 
+            const userHosp = await req.body;
+            Hosp.aggregate([
+
+                {"$match":{"hospname":userHosp.hospital}},
+                {"$unwind":"$dept"},
+                {"$match":{"dept.deptname":userHosp.department}},
+                {"$unwind":"$dept.doctor"},
+                {"$match":{"dept.doctor.docname":userHosp.docname}}], function(err, hosp) {
+
+                    const docdetails = hosp;
+                    res.send(hosp);
+
+                });
 
         } catch (err) {
 
+            res.status(400).send({
+                
+                error: "Doctor Not Found"
+                
+            });
 
         }
 

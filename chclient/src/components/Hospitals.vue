@@ -7,7 +7,7 @@
                         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <FormInput v-bind:type="textOne" v-bind:name="nameOne" v-bind:text="text"></FormInput>
                             <div class="mb">
-                                <MadButton v-bind:msg="Msg"></MadButton>
+                                <MadButton v-on:click="hospital" v-bind:msg="Msg"></MadButton>
                             </div>
                         </div>
                     </form>
@@ -15,7 +15,7 @@
             </div>
             <div class="listbox">
                 <ul>
-                    <li class="listitems" v-for="item in hospitallist"><a>{{item.name}}</a></li>
+                    <li class="listitems" v-for="item in hospitallist"><a v-on:click="load(item.name)">{{item.name}}</a></li>
                 </ul>
             </div>
 
@@ -56,13 +56,25 @@ export default {
           address: 'Kochi Kerala'
         }
       ],
+      nameSelect: null
     }
   },
   methods: {
-    hospital() {
-
+    load: function (a) {
+      this.nameSelect = a
+    },
+    async hospital () {
+      try {
+        const response = await HospitalService.hospital({
+          hospital: this.nameOne
+        })
+        console.log(response)
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
+
 }
 </script>
 

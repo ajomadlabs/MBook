@@ -25,15 +25,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <ul class="card-holder">
-                        <li class="card" v-for="time in timings"> <div class="text">{{ time.val }}</div></li>
-                    </ul>
-
-                    <div class="bill-text-region">
-                        <p class="bill-text lato primary-color"> Booking on - {{ sentence }}</p>
-                        <p class="bill-text-token lato primary-color"> Token -  {{ tokenSentence }}</p>
+                    <div class="dateboxcontainer">
+                      <p class="heading">Hey!, You have booked for </p>
+                      <div class="datebox">{{ date }}</div>
+                      <div class="datebox">{{ dayWord }}</div>
+                      <div class="datebox">{{ monthWord }}</div>
+                      <div class="datebox">{{ year }}</div>
+                      <p class="heading-under">Your token no. is - {{ tokenCurr }} </p>
                     </div>
-
+                    <!--<p class="bill-text-token lato primary-color"> Token -  {{ tokenSentence }}</p>-->
                     <div class="but">
                         <MadButton v-bind:msg="Proceed"></MadButton>
                     </div>
@@ -68,21 +68,7 @@ export default {
       tokenTotal: 20,
       tokenSentence: null,
       sentence: null,
-      Proceed: 'Proceed',
-      timings: [
-        {
-          val: '10:00 - 11:00'
-        },
-        {
-          val: '10:00 - 11:00'
-        },
-        {
-          val: '10:00 - 11:00'
-        },
-        {
-          val: '10:00 - 11:00'
-        }
-      ]
+      Proceed: 'Proceed'
     }
   },
   created: function () {
@@ -127,13 +113,45 @@ export default {
     } else {
       this.monthWord = 'December'
     }
-    this.sentence = this.date + '  ' + this.monthWord + ',  ' + this.dayWord + ',  ' + this.year
+    this.sentence = this.date + '  ' + this.dayWord + ',  ' + this.monthWord + ',  ' + this.year
     this.tokenSentence = this.tokenCurr + ' / ' + this.tokenTotal
   }
 }
 </script>
 
 <style scoped>
+
+.datebox{
+  background-color: #3b2577;
+  color: white;
+  font-size: 4rem;
+  padding: 40px;
+  display: inline-block;
+  font-weight: 300;
+  font-family: "Lato", sans-serif;
+  margin: -2px;
+}
+
+.heading {
+  font-weight: 300;
+  font-family: "Lato", sans-serif;
+  font-size: 4.5rem;
+  padding-top: 5%;
+  padding-bottom: 2%; 
+}
+
+.heading-under {
+  font-weight: 300;
+  font-family: "Lato", sans-serif;
+  font-size: 6rem;
+  padding-top: 3%;
+  padding-bottom: 2%; 
+}
+
+.dateboxcontainer{
+  display: block;
+  text-align: center;
+}
 .hosp-name {
   display: inline-block;
   position: relative;
@@ -152,15 +170,6 @@ export default {
   font-weight: 300;
 }
 
-.bill-text{
-  position: absolute;
-  display: inline-block;
-  right: 8%;
-  font-size: 1.2em;
-  font-weight: 700;
-  text-align: right;
-}
-
 .bill-text-token{
   position: absolute;
   display: inline-block;
@@ -168,11 +177,6 @@ export default {
   font-size: 1.2em;
   font-weight: 700;
   text-align: right;
-}
-
-.bill-text-region{
-  padding-top: 10px;
-  padding-bottom: 5%;
 }
 
 .doctor-name {

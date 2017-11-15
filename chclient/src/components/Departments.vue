@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="card-holder">
-                        <li class="card" v-for="dept in departments"> <div class="text">{{ dept.name }}</div></li>
+                        <li class="card" v-for="dept in departments" v-on:click="selectDept(dept.name)"> <div class="text">{{ dept.name }}</div></li>
                     </ul>
                 </div>
             </div>
@@ -23,6 +23,7 @@
 <script>
   export default {
     name: 'Deparment',
+    dname: null,
     data () {
       return {
         hospital: 'Aster Medcity',
@@ -40,6 +41,11 @@
             name: 'Dentistry'
           }
         ]
+      }
+    },
+    methods: {
+      selectDept: function (dname) {
+        this.dname = dname
       }
     }
   }

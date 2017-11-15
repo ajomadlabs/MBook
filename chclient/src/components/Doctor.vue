@@ -14,8 +14,7 @@
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="card-holder">
-                        <li class="card" v-for="dept in departments"> <div class="text">{{ dept.name }} </div> <div class="text-under">{{ dept.title }}</div></li>
-                        
+                        <li class="card" v-for="doc in doctors" v-on:click="saveDoctor(doc.name)"> <div class="text">{{ doc.name }} </div> <div class="text-under">{{ doc.title }}</div></li>
                     </ul>
                 </div>
             </div>
@@ -26,11 +25,12 @@
 <script>
   export default {
     name: 'Deparment',
+    docname: null,
     data () {
       return {
         hospital: 'Aster Medcity',
         deptname: 'Oncology',
-        departments: [
+        doctors: [
           {
             name: 'Dr. Varma',
             title: 'MBBS ........sa'
@@ -44,6 +44,12 @@
             title: 'MBBS ........sa'
           }
         ]
+      }
+    },
+    methods: {
+      saveDoctor: function (dname) {
+        this.docname = dname
+        console.log(this.docname)
       }
     }
   }

@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const db = require('./app/config/db.js');
 const passport = require('passport');
 const flash = require('connect-flash');
+const cors = require('cors');
 
 // Defining the app
 
@@ -35,6 +36,7 @@ app.use(passport.session());
 app.use(flash());
 app.set('views', './app/views');
 app.set('view engine', 'ejs');
+app.use(cors());
 
 // Require Passport config
 require('./app/config/passport')(passport);

@@ -40,15 +40,16 @@ module.exports = function (app, passport) {
     app.post('/hospital', async function (req, res) {
 
         // @TODO: Search Hospital Functionality
-
+        
         try {
 
             const userHosp = await req.body;
+            console.log(userHosp);
 
             Hosp.findOne({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
 
                 const deptmnt = hosp;
-                console.log(hosp._doc);
+                // console.log(hosp._doc);
                 res.send(deptmnt);
 
             });

@@ -6,8 +6,8 @@
                     <form>
                         <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <FormInput v-bind:type="textOne" v-bind:name="nameOne" v-bind:text="text"></FormInput>
-                            <div class="mb">
-                                <MadButton v-on:click="hospital" v-bind:msg="Msg"></MadButton>
+                            <div class="mb" v-on:click="hosp" v-on:keyup.enter="hosp">
+                                <MadButton v-bind:msg="Msg"></MadButton>
                             </div>
                         </div>
                     </form>
@@ -63,13 +63,15 @@ export default {
     load: function (a) {
       this.nameSelect = a
     },
-    async hospital () {
+    hosp: function () {
       try {
-        const response = await HospitalService.hospital({
+        console.log('Hello')
+        const response = HospitalService.hospital({
           hospital: this.nameOne
         })
         console.log(response)
       } catch (error) {
+        console.log('HE')
         this.error = error.response.data.error
       }
     }

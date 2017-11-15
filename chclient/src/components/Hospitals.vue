@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import HospitalService from '@/services/HospitalService'
 import MadButton from '@/components/MadButton'
 import FormInput from '@/components/FormInputJump'
 export default {
@@ -54,7 +55,12 @@ export default {
           name: 'Aster fse Medcity',
           address: 'Kochi Kerala'
         }
-      ]
+      ],
+    }
+  },
+  methods: {
+    hospital() {
+
     }
   }
 }

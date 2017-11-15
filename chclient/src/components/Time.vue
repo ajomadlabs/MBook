@@ -33,7 +33,6 @@
                       <div class="datebox">{{ year }}</div>
                       <p class="heading-under">Your token no. is - {{ tokenCurr }} </p>
                     </div>
-                    <div> asads</div>
                     <!--<p class="bill-text-token lato primary-color"> Token -  {{ tokenSentence }}</p>-->
                     <div class="but">
                         <MadButton v-bind:msg="Proceed"></MadButton>

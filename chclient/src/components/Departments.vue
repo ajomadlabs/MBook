@@ -21,17 +21,45 @@
 </template>
 
 <script>
+  import HospitalService from '@/services/HospitalService'
   export default {
     name: 'Deparment',
     dname: null,
     data () {
       return {
+        doctorList: null,
+        doctorsDetail: []
       }
     },
     methods: {
       selectDept: function (dname) {
         this.$store.commit('setSelectDept', dname)
-        this.$router.push({ path: '/doctor' })
+        this.doctorsfunc()
+        // this.$router.push({ path: '/doctor' })
+      },
+      doctorsfunc: async function () {
+        try {
+          await HospitalService.doctor({
+            hospital: this.hospital,
+            department: this.selectedDepartment
+          }).then(data => {
+            this.doctorList = data.data
+          })
+          // console.log(this.doctorList[0])
+          // console.log(this.doctorList[0].dept.doctor[0].docname)
+          for (var i = 0; i < this.doctorList[0].dept.doctor.length; i++) {
+            this.doctorsDetail[i] = {
+              doctorname: this.doctorList[0].dept.doctor[i].docname,
+              doctime: this.doctorList[0].dept.doctor[i].doctime,
+              doctoken: this.doctorList[0].dept.doctor[i].doctokens
+            }
+          }
+        // console.log(this.doctorsDetail)
+          this.$store.commit('setDoctorList', this.doctorsDetail)
+          this.$router.push({ path: '/doctor' })
+        } catch (error) {
+          this.error = error.doctorList.data.error
+        }
       }
     },
     computed: {
@@ -40,6 +68,9 @@
       },
       departments: function () {
         return this.$store.getters.getDeptList
+      },
+      selectedDepartment: function () {
+        return this.$store.getters.getSelectDept
       }
     }
   }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Land from '@/components/Land'
 import Home from '@/components/Home'
-import Welcome from '@/components/Welcome'
+import OTP from '@/components/OTP'
 import SearchHospitals from '@/components/Hospitals'
 import Department from '@/components/Departments'
 import Doctor from '@/components/Doctor'
@@ -10,6 +10,7 @@ import PickDate from '@/components/PickDate'
 import Time from '@/components/Time'
 import HistoryBooking from '@/components/History'
 import View from '@/components/View'
+import EnterNumber from '@/components/EnterNumber'
 
 Vue.use(Router)
 
@@ -27,9 +28,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/welcome',
-      name: 'Welcome',
-      component: Welcome
+      path: '/enterotp',
+      name: 'OTP',
+      component: OTP
     },
     {
       path: '/hospitals',
@@ -60,6 +61,11 @@ export default new Router({
       path: '/history',
       name: 'History',
       component: HistoryBooking
+    },
+    {
+      path: '/enternumber',
+      name: 'EnterNumber',
+      component: EnterNumber
     },
     {
       path: '/view',

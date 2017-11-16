@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="card-holder">
-                        <li class="card" v-for="doc in doctors" v-on:click="saveDoctor(doc.name)"> <div class="text">{{ doc.name }} </div> <div class="text-under">{{ doc.title }}</div></li>
+                        <li class="card" v-for="doc in doctors" v-on:click="saveDoctor(doc.doctorname,doc.doctime,doc.doctoken)"> <div class="text">{{ doc.doctorname }} </div> <div class="text-under">{{ doc.doctime }}</div></li>
                     </ul>
                 </div>
             </div>
@@ -23,45 +23,23 @@
 </template>
 
 <script>
-  import HospitalService from '@/services/HospitalService'
   export default {
     name: 'Deparment',
-    docname: null,
     data () {
       return {
-        doctors: [
-          {
-            name: 'Dr. Varma',
-            title: 'MBBS ........sa'
-          },
-          {
-            name: 'Dr. Doctor',
-            title: 'MBBS ........sa'
-          },
-          {
-            name: 'Dr. Blah',
-            title: 'MBBS ........sa'
-          }
-        ],
-        doctorList: null,
-        error: null
+        error: null,
+        selectedDoctor: null,
+        selectedTime: null
       }
     },
     methods: {
-      saveDoctor: function (dname) {
-        this.docname = dname
-        console.log(this.docname)
-      },
-      doctors: async function () {
-        try {
-          this.doctorList = (await HospitalService.doctor({
-            hospital: this.hospital(),
-            department: this.departments()
-          })).data
-          console.log(this.doctorList)
-        } catch (error) {
-          this.error = error.doctorList.data.error
-        }
+      saveDoctor: function (dname, dtime, dtoken) {
+        // this.docname = dname
+        // console.log(this.docname)
+        this.$store.commit('setSelectedDoctor', dname)
+        this.$store.commit('setSelectedDoctorTime', dtime)
+        this.$store.commit('setSelectedDoctorToken', dtoken)
+        this.$router.push({path: '/pickadate'})
       }
     },
     computed: {
@@ -70,6 +48,9 @@
       },
       selectDept: function () {
         return this.$store.getters.getSelectDept
+      },
+      doctors: function () {
+        return this.$store.getters.getDoctorList
       }
     }
   }

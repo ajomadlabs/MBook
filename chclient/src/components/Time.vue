@@ -9,7 +9,7 @@
                     <br />
                     <p class="doctor-name lato primary-color">{{ doctorname }}</p>
                     <br />
-                    <p class="title lato primary-color">{{ title }}</p>
+                    <p class="title lato primary-color">{{ time }}</p>
                 </div>
             </div>
         </div>
@@ -34,13 +34,12 @@
                       <p class="heading-under">Your token no. is - {{ tokenCurr }} </p>
                     </div>
                     <!--<p class="bill-text-token lato primary-color"> Token -  {{ tokenSentence }}</p>-->
-                    <div class="but">
+                    <div v-on:click="load()" class="but">
                         <MadButton v-bind:msg="Proceed"></MadButton>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>  
 </template>
 
@@ -54,24 +53,16 @@ export default {
   },
   data () {
     return {
-      hospital: 'Aster Medcity',
-      deptname: 'Oncology',
-      doctorname: 'Dr Varma',
-      title: 'MBBS.. B.Ed',
-      year: '2017',
-      day: 2,
+      years: null,
       dayWord: null,
-      month: 0,
       monthWord: null,
-      date: 28,
-      tokenCurr: 7,
-      tokenTotal: 20,
       tokenSentence: null,
       sentence: null,
       Proceed: 'Proceed'
     }
   },
   created: function () {
+    this.years = this.year
     if (this.day === 0) {
       this.dayWord = 'Saturday'
     } else if (this.day === 1) {
@@ -113,8 +104,41 @@ export default {
     } else {
       this.monthWord = 'December'
     }
-    this.sentence = this.date + '  ' + this.dayWord + ',  ' + this.monthWord + ',  ' + this.year
-    this.tokenSentence = this.tokenCurr + ' / ' + this.tokenTotal
+    this.sentence = this.date + '  ' + this.dayWord + ',  ' + this.monthWord + ',  ' + this.years
+  },
+  computed: {
+    hospital: function () {
+      return this.$store.getters.getHospName
+    },
+    deptname: function () {
+      return this.$store.getters.getSelectDept
+    },
+    doctorname: function () {
+      return this.$store.getters.getSelectedDoctor
+    },
+    time: function () {
+      return this.$store.getters.getSelectedTime
+    },
+    year: function () {
+      return this.$store.getters.getYear
+    },
+    month: function () {
+      return this.$store.getters.getMonth
+    },
+    day: function () {
+      return this.$store.getters.getDay
+    },
+    date: function () {
+      return this.$store.getters.getDate
+    },
+    tokenCurr: function () {
+      return this.$store.getters.getToken
+    }
+  },
+  methods: {
+    load: function () {
+      this.$router.push({path: '/enternumber'})
+    }
   }
 }
 </script>

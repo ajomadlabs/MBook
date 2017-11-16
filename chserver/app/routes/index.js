@@ -2,6 +2,15 @@
 
 const User = require('../models/user');
 const Hosp = require('../models/hospitals');
+const otp = require("random-number");
+const request = require("request");
+
+var options = {
+    min: 999,
+    max : 9999,
+    integer: true
+
+}
 
 module.exports = function (app, passport) {
 
@@ -21,7 +30,6 @@ module.exports = function (app, passport) {
 
             const user = await req.user;
             res.send(user.toJSON());
-            //console.log(user);
 
         } catch (err) {
 
@@ -49,7 +57,6 @@ module.exports = function (app, passport) {
             Hosp.find({'hospname': {$regex:'^' + userHosp.hospital + '','$options' : 'i'}},{'hospname':1}, function (err, hosp) {
 
                 const deptmnt = hosp;
-                // console.log(hosp._doc);
                 res.send(deptmnt);
 
             });
@@ -79,7 +86,6 @@ module.exports = function (app, passport) {
             Hosp.find({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
 
                 const deptmnt = hosp;
-                // console.log(hosp._doc);
                 res.send(deptmnt);
 
             });
@@ -111,7 +117,6 @@ module.exports = function (app, passport) {
                 {"$match":{"dept.deptname":userHosp.department}}], function (err, hosp) {
 
                 const doctors = hosp;
-                console.log(hosp._doc);
                 res.send(doctors);
 
             });
@@ -201,6 +206,101 @@ module.exports = function (app, passport) {
 
     });
 
+    // Appointment Book Route
+
+    app.post('/book', async function (req, res) {
+        
+        // @TODO: Appointment Date Search Functionality
+        try {
+            
+            const userHosp = await req.body;
+            const appointBook = {
+                
+                hospname: userHosp.hosp,
+                doctor: userHosp.doc,
+                dept: userHosp.dept,
+                time: userHosp.time,
+                verified: userHosp.verified,
+                otp: otp(options)
+
+            }
+
+            sms(8086699507,appointBook.otp);
+
+            //console.log(appointBook);
+            
+            User.update({"user.email":userHosp.email},{"$push":{"user.curappoint":appointBook}},function(err, user){
+
+                res.send(user);
+                console.log("Successful");
+
+            });
+
+        } catch (err) {
+
+            res.status(400).send({
+                
+                error: "Booking Not Successful"
+                
+            });
+            console.log(err);
+
+        }
+
+    });
+
+    // OTP Book Route
+
+    app.post('/otp', async function (req, res) {
+        
+        // @TODO: Appointment Date Search Functionality
+        try {
+            
+            const userHosp = await req.body;
+            const appointBook = {
+                
+                hospname: userHosp.hosp,
+                doctor: userHosp.doc,
+                dept: userHosp.dept,
+                time: userHosp.time,
+                verified: userHosp.verified,
+                otp: userHosp.otp
+
+            }
+
+            // const confappointBook = {
+                
+            //     hospname: userHosp.hosp,
+            //     doctor: userHosp.doc,
+            //     dept: userHosp.dept,
+            //     time: userHosp.time,
+            //     verified: true,
+            //     otp: userHosp.otp
+
+            // }
+
+            //console.log(appointBook);
+            
+            User.update({"user.email":userHosp.email, "user.curappoint.otp":userHosp.otp},{"$set":{"user.curappoint.$.verified":true}},function(err, user){
+
+                res.send(user);
+                console.log("Successful");
+
+            });
+
+        } catch (err) {
+
+            res.status(400).send({
+                
+                error: "Booking Not Successful"
+                
+            });
+            console.log(err);
+
+        }
+
+    });
+
     // View Appointment Route 
 
     app.post('/view', async function (req, res) {
@@ -208,9 +308,29 @@ module.exports = function (app, passport) {
         // @TODO: View Appointment Functionality
         try {
 
+            const userHosp = await req.body;
+
+            User.findOne({"user.email":userHosp.email}, function(err, user) {
+
+                const appointbooks = {
+
+                    current: user.user.curappoint,
+                    previous:user.user.preappoint
+
+                }
+
+                res.send(appointbooks);
+                //console.log(user);
+
+            });
 
         } catch (err) {
 
+            res.status(400).send({
+                
+                error: "Something went wrong"
+                
+            });
 
         }
 
@@ -254,4 +374,19 @@ function isLoggedIn(req, res, next) {
 
     }
 
+}
+
+function sms(mobno,message) {
+
+    request.get("https://smsapi.engineeringtgr.com/send/?Mobile="+process.env.MOBNO+"&Password="+process.env.SMSPASSWORD+"&Message="+message+"&To="+mobno+"&Key="+process.env.SMSKEY+"", function(error,response,body){
+        
+        if (error){
+
+            throw error;
+
+        }
+
+        // console.log(process.env.MOBNO);
+
+    });
 }

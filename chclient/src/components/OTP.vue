@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <form>
-                    <input type="text" name="number">
+                    <input type="text">
                     <a class="lato yellow spc-link"> resend otp </a>
                     <br />
                     <MadButton v-bind:msg="Msg"></MadButton>

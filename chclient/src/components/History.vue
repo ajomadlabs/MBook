@@ -5,7 +5,7 @@
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="hosp-name lato primary-color">{{ user }}</p>
                     <br />
-                    <p class="dept-name lato primary-color">{{ number }}</p>
+                    <p class="dept-name lato primary-color">{{ email }}</p>
                     <br />
                     <div class="bp">
                      <router-link to="/hospitals"><MadButton v-bind:msg="Book"></MadButton></router-link>
@@ -39,11 +39,9 @@
     },
     data () {
       return {
-        user: 'Ajo Kundi',
-        number: '+91 8281408069',
         Book: 'Book',
-        Cancel: 'Cancel',
-        bookings: [
+        Cancel: 'Cancel'
+        /* bookings: [
           {
             name: 'Dr. Varma',
             timing: 'MBBS ........sa',
@@ -59,7 +57,18 @@
             timing: 'MBBS ........sa',
             active: false
           }
-        ]
+        ] */
+      }
+    },
+    computed: {
+      user: function () {
+        return this.$store.getters.getName
+      },
+      email: function () {
+        return this.$store.getters.getEmail
+      },
+      bookings: function () {
+        return this.$store.getters.getBookings
       }
     }
   }

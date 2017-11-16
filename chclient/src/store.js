@@ -5,6 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    name: null,
+    email: null,
+    bookings: null,
     hospital: null,
     departments: null,
     selectedDept: null,
@@ -19,6 +22,12 @@ export default new Vuex.Store({
     number: null
   },
   getters: {
+    getName: function (state) {
+      return state.name
+    },
+    getEmail: function (state) {
+      return state.email
+    },
     getDeptList: function (state) {
       return state.departments
     },
@@ -61,6 +70,15 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setName: function (state, name) {
+      state.name = name
+    },
+    setEmail: function (state, email) {
+      state.email = name
+    },
+    setBookings: function (state, bookings) {
+      state.bookings = bookings
+    },
     setHospName: function (state, name) {
       state.hospital = name
     },
@@ -96,6 +114,7 @@ export default new Vuex.Store({
     },
     setNumber: function (state, number) {
       state.number = number
+      console.log(number)
     }
   },
   actions: {

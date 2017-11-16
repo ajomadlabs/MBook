@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import HospitalService from '@/services/HospitalService'
   export default {
     name: 'Deparment',
     docname: null,
@@ -41,13 +42,26 @@
             name: 'Dr. Blah',
             title: 'MBBS ........sa'
           }
-        ]
+        ],
+        doctorList: null,
+        error: null
       }
     },
     methods: {
       saveDoctor: function (dname) {
         this.docname = dname
         console.log(this.docname)
+      },
+      doctors: async function () {
+        try {
+          this.doctorList = (await HospitalService.doctor({
+            hospital: this.hospital(),
+            department: this.departments()
+          })).data
+          console.log(this.doctorList)
+        } catch (error) {
+          this.error = error.doctorList.data.error
+        }
       }
     },
     computed: {

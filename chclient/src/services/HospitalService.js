@@ -12,5 +12,8 @@ export default {
   },
   hospital (userdata) {
     return Api().post('/hospital', userdata)
+  },
+  doctor (userdata) {
+    return Api().post('/department', userdata)
   }
 }

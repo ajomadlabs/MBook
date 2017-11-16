@@ -268,17 +268,6 @@ module.exports = function (app, passport) {
 
             }
 
-            // const confappointBook = {
-                
-            //     hospname: userHosp.hosp,
-            //     doctor: userHosp.doc,
-            //     dept: userHosp.dept,
-            //     time: userHosp.time,
-            //     verified: true,
-            //     otp: userHosp.otp
-
-            // }
-
             //console.log(appointBook);
             
             User.update({"user.email":userHosp.email, "user.curappoint.otp":userHosp.otp},{"$set":{"user.curappoint.$.verified":true}},function(err, user){

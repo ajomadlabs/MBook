@@ -16,7 +16,7 @@ const hospitalSchema = mongoose.Schema({
                 docdate: [{
 
                     date: String,
-                    token: String
+                    token: Number
 
                 }]
 

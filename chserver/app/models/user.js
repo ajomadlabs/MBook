@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema({
             doctor: String,
             dept: String,
             time: String,
+            mobNo: Number,
             verified: false,
             otp: Number
         

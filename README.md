@@ -55,7 +55,7 @@
 
 1. Setup a MLabs Account
 2. Create a database
-3. Copy and Paste the secong URL into the `db.js` in `chserver` folder
+3. Copy and Paste the second URL into the `db.js` in `chserver` folder
 
 **OTP**
 

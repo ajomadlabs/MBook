@@ -2,8 +2,9 @@
     <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container-fluid">
             <div class="row">
-                <form>
-                    <input v-model="value" type="text" name="number"> 
+                <form v-on:submit.prevent>
+                    <input v-model="value" type="text">
+                    <a v-show="valid" class="lato yellow"> Enter a valid Indian Number </a>
                     <br />
                     <div v-on:click="loadNumber" class="mb">
                         <MadButton v-bind:msg="Msg"></MadButton>
@@ -23,7 +24,8 @@ export default {
   data () {
     return {
       value: null,
-      Msg: 'Submit'
+      Msg: 'Submit',
+      valid: false
     }
   },
   components: {
@@ -32,9 +34,16 @@ export default {
   },
   methods: {
     loadNumber: function () {
-      this.$store.commit('setNumber', this.value)
       // otp function goes here
-      this.$router.push({path: '/enterotp'})
+      var PhoneNumber = require('awesome-phonenumber')
+      var pn = new PhoneNumber(this.value, 'IN')
+      if (pn.isValid()) {
+        this.$store.commit('setNumber', this.value)
+        this.$router.push({path: '/enterotp'})
+      } else {
+        this.value = null
+        this.valid = true
+      }
     }
   }
 }
@@ -55,6 +64,15 @@ select {
   text-align: center;
   font-size: 2.5em;
   color: #3b2577;
+}
+
+.lato{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+.yellow{
+    color: #ffcc00;
 }
 
 .mb{

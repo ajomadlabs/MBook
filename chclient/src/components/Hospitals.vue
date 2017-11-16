@@ -1,30 +1,27 @@
 <template>
     <div>
-        
-            <div class="container-fluid fluidblock">
-                <div class="row imp-padding">
-                    <form v-on:submit.prevent>
-                        <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="input-field">
-                                <input v-model="message" type="text" name="search" id="field" class="inputText" />
-                                <label for="field">{{ text }}</label>
-                            </div>
-                            <div class="mb" v-on:click="searchosp" v-on:keyup.enter="searchosp">
-                                
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="listbox">
-                <ul>
-                    
-                    <li class="listitems" v-for="item in hospitallist"><a v-on:click="hosp(item.hospname)">{{item.hospname}}</a></li>
-                </ul>
-            </div>
-            
-
+      <div class="container-fluid fluidblock">
+          <div class="row imp-padding">
+              <form v-on:submit.prevent>
+                  <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="input-field">
+                          <input v-model="message" type="text" name="search" id="field" class="inputText" />
+                          <label for="field">{{ text }}</label>
+                      </div>
+                      <div class="mb" v-on:click="searchosp" v-on:keyup.enter="searchosp">
+                          
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+      
+      <div class="listbox">
+          <ul>  
+              <li class="listitems" v-for="item in hospitallist"><a v-on:click="hosp(item.hospname)">{{item.hospname}}</a></li>
+          </ul>
+      </div>
+      {{nameHosp}}
     </div>
 </template>
 
@@ -32,6 +29,7 @@
 import HospitalService from '@/services/HospitalService'
 import MadButton from '@/components/MadButton'
 import FormInput from '@/components/FormInputJump'
+
 export default {
   name: 'Hospital',
   components: {
@@ -45,21 +43,21 @@ export default {
       message: null,
       text: 'Enter Hospital\'s name or Doctor\'s name',
       hospitallist: null,
-      nameSelect: null,
+      name: null,
       nameHosp: null
     }
   },
   methods: {
-    load: function (a) {
-      this.nameSelect = a
-      console.log(this.nameSelect)
-    },
     hosp: async function (nameSelect) {
+      this.name = nameSelect
       try {
         this.nameHosp = (await HospitalService.hospital({
           hospital: nameSelect
         })).data
-        console.log(this.nameHosp[0].dept[1].deptname)
+        for (var i = 0; i < 3; i++) {
+          console.log(this.nameHosp[0].dept[i].deptname)
+        }
+        this.hospitalstore()
       } catch (error) {
         this.error = error.response.data.error
       }
@@ -72,9 +70,15 @@ export default {
           hospital: this.message
         })).data
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         this.error = error.response.data.error
       }
+    },
+    hospitalstore: function () {
+      this.$store.commit('setHospName', this.name)
+      this.$store.commit('setDepts', this.nameHosp)
+      // console.log(this.$store.state.hospital)
+      // console.log(this.$store.state.departments)
     }
   }
 
@@ -85,7 +89,6 @@ export default {
 .input-field{
   position: relative;
   width: 100%;
-     
 }
 
 label{

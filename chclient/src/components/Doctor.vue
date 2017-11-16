@@ -5,7 +5,7 @@
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="hosp-name lato primary-color">{{ hospital }}</p>
                     <br />
-                    <p class="dept-name lato primary-color">{{ deptname }}</p>
+                    <p class="dept-name lato primary-color">{{ selectDept }}</p>
                 </div>
             </div>
         </div>
@@ -28,8 +28,6 @@
     docname: null,
     data () {
       return {
-        hospital: 'Aster Medcity',
-        deptname: 'Oncology',
         doctors: [
           {
             name: 'Dr. Varma',
@@ -50,6 +48,14 @@
       saveDoctor: function (dname) {
         this.docname = dname
         console.log(this.docname)
+      }
+    },
+    computed: {
+      hospital: function () {
+        return this.$store.getters.getHospName
+      },
+      selectDept: function () {
+        return this.$store.getters.getSelectDept
       }
     }
   }

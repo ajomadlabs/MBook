@@ -6,10 +6,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     hospital: null,
-    departments: null
+    departments: null,
+    selectedDept: null
   },
   getters: {
-    // TODO:
+    getDeptList: function (state) {
+      return state.departments
+    },
+    getHospName: function (state) {
+      return state.hospital
+    },
+    getSelectDept: function (state) {
+      return state.selectedDept
+    }
   },
   mutations: {
     setHospName: function (state, name) {
@@ -17,6 +26,9 @@ export default new Vuex.Store({
     },
     setDepts: function (state, name) {
       state.departments = name
+    },
+    setSelectDept: function (state, name) {
+      state.selectedDept = name
     }
   },
   actions: {

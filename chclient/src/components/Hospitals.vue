@@ -21,7 +21,6 @@
               <li class="listitems" v-for="item in hospitallist"><a v-on:click="hosp(item.hospname)">{{item.hospname}}</a></li>
           </ul>
       </div>
-      {{nameHosp}}
     </div>
 </template>
 
@@ -44,7 +43,8 @@ export default {
       text: 'Enter Hospital\'s name or Doctor\'s name',
       hospitallist: null,
       name: null,
-      nameHosp: null
+      nameHosp: null,
+      deptList: []
     }
   },
   methods: {
@@ -54,9 +54,10 @@ export default {
         this.nameHosp = (await HospitalService.hospital({
           hospital: nameSelect
         })).data
-        for (var i = 0; i < 3; i++) {
-          console.log(this.nameHosp[0].dept[i].deptname)
+        for (var i = 0; i < this.nameHosp[0].dept.length; i++) {
+          this.deptList[i] = this.nameHosp[0].dept[i].deptname
         }
+        // console.log(this.deptList[0])
         this.hospitalstore()
       } catch (error) {
         this.error = error.response.data.error
@@ -76,9 +77,11 @@ export default {
     },
     hospitalstore: function () {
       this.$store.commit('setHospName', this.name)
-      this.$store.commit('setDepts', this.nameHosp)
+      this.$store.commit('setDepts', this.deptList)
       // console.log(this.$store.state.hospital)
       // console.log(this.$store.state.departments)
+      // console.log(this.$store.state.departments)
+      this.$router.push({ path: '/departments' })
     }
   }
 

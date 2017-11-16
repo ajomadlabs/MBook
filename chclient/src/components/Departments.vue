@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="card-holder">
-                        <li class="card" v-for="dept in departments" v-on:click="selectDept(dept.name)"> <div class="text">{{ dept.name }}</div></li>
+                        <li class="card" v-for="dept in departments" v-on:click="selectDept(dept)"> <div class="text">{{ dept }}</div></li>
                     </ul>
                 </div>
             </div>
@@ -26,26 +26,20 @@
     dname: null,
     data () {
       return {
-        hospital: 'Aster Medcity',
-        departments: [
-          {
-            name: 'Oncology'
-          },
-          {
-            name: 'Opthomology'
-          },
-          {
-            name: 'Cardiology'
-          },
-          {
-            name: 'Dentistry'
-          }
-        ]
       }
     },
     methods: {
       selectDept: function (dname) {
-        this.dname = dname
+        this.$store.commit('setSelectDept', dname)
+        this.$router.push({ path: '/doctor' })
+      }
+    },
+    computed: {
+      hospital: function () {
+        return this.$store.getters.getHospName
+      },
+      departments: function () {
+        return this.$store.getters.getDeptList
       }
     }
   }

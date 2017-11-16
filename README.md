@@ -17,6 +17,55 @@
 - Users can view their current and previous appointments
 - They also get their booking dates synced with their respective Google Calenders
 
+## Stack
+
+**Frontend**
+
+- Vuejs
+- Bootstrap
+
+**Backend**
+
+- Nodejs
+- Express
+
+**Database**
+
+- MongoDB
+
+**Dependencies**
+
+- Express
+- body-parser
+- mongoose
+- cors
+- random-number
+- passport
+
+
+## Pre-Requisites
+
+**Google OAUth**
+
+1. Go to `https://console.developers.google.com`
+2. Setup a Google OAuth
+3. Copy and Paste the credentials in `auth.js` in `chserver` folder
+
+**MLabs**
+
+1. Setup a MLabs Account
+2. Create a database
+3. Copy and Paste the secong URL into the `db.js` in `chserver` folder
+
+**OTP**
+
+1. Create an account in `http://site21.way2sms.com/content/index.html`
+2. Set the username, password and key as the environment variables in the following manner
+
+   `export MOBNO=<Mobile number>`
+   `export SMSPASSWORD=<Password>`
+   `export SMSKEY=<Key>`
+
 ## Installation
 
 1. Create a folder Carehacks `mkdir Carehacks`
@@ -28,6 +77,7 @@
 7. Navigate into chserver `cd chserver`
 8. Install all the nodemodules `npm install`
 9. Run the server `npm run dev`
+10. Go to `http://localhost:8081`
 
 ## Contributors
 

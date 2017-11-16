@@ -118,6 +118,7 @@ module.exports = function (app, passport) {
 
                 const doctors = hosp;
                 res.send(doctors);
+                console.log(doctors);
 
             });
 

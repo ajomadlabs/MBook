@@ -9,7 +9,7 @@
                     <br />
                     <p class="doctor-name lato primary-color">{{ doctorname }}</p>
                     <br />
-                    <p class="title lato primary-color">{{ title }}</p>
+                    <p class="title lato primary-color">{{ time }}</p>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="but">
+            <div v-on:click='confirm()' class="but">
                 <MadButton v-bind:msg="Proceed"></MadButton>
             </div>
         </div>
@@ -59,10 +59,6 @@ export default {
   },
   data () {
     return {
-      hospital: 'Aster Medcity',
-      deptname: 'Oncology',
-      doctorname: 'Dr Varma',
-      title: 'MBBS.. B.Ed',
       selectedDate: new Date(),
       year: null,
       day: null,
@@ -134,7 +130,28 @@ export default {
       this.year = this.selectedDate.getFullYear()
       this.date = this.selectedDate.getDate()
       this.day = this.selectedDate.getDay()
-      this.month = this.selectedDate.getMonth() + 1
+      this.month = this.selectedDate.getMonth()
+    },
+    confirm: function () {
+      this.$store.commit('setDate', this.date)
+      this.$store.commit('setDay', this.day + 1)
+      this.$store.commit('setYear', this.year)
+      this.$store.commit('setMonth', this.month)
+      this.$router.push({path: '/timings'})
+    }
+  },
+  computed: {
+    hospital: function () {
+      return this.$store.getters.getHospName
+    },
+    deptname: function () {
+      return this.$store.getters.getSelectDept
+    },
+    doctorname: function () {
+      return this.$store.getters.getSelectedDoctor
+    },
+    time: function () {
+      return this.$store.getters.getSelectedTime
     }
   }
 }

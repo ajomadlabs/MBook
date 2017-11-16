@@ -18,7 +18,8 @@ const userSchema = mongoose.Schema({
             time: String,
             mobNo: Number,
             verified: false,
-            otp: Number
+            otp: Number,
+            date: Date
         
         }],
         preappoint: [{
@@ -26,7 +27,8 @@ const userSchema = mongoose.Schema({
             hospname: String,
             doctor: String,
             dept: String,
-            time: String
+            time: String,
+            date: Date
 
         }]
                 

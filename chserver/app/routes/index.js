@@ -11,37 +11,11 @@ var options = {
     integer: true
 
 }
+var userD = "";
 
 module.exports = function (app, passport) {
 
-    // Default Route
 
-    app.get('/', function (req, res) {
-
-        res.render('index.ejs');
-
-    });
-
-    // Profile Route
-
-    app.get('/profile', isLoggedIn, async function (req, res) {
-
-        try {
-
-            const user = await req.user;
-            res.send(user.toJSON());
-
-        } catch (err) {
-
-            res.status(400).send({
-
-                error: "Something Went Wrong"
-
-            });
-
-        }
-
-    });
 
     // Search Route
 
@@ -50,10 +24,8 @@ module.exports = function (app, passport) {
         // @TODO: Search Hospital Functionality
         
         try {
-
             const userHosp = await req.body;
-            console.log(userHosp);
-
+            //console.log(userD.user.email);
             Hosp.find({'hospname': {$regex:'^' + userHosp.hospital + '','$options' : 'i'}},{'hospname':1}, function (err, hosp) {
 
                 const deptmnt = hosp;
@@ -72,16 +44,17 @@ module.exports = function (app, passport) {
 
     });
 
+
+
     // Hospital Search Route
 
     app.post('/hospital', async function (req, res) {
         
         // @TODO: Search Hospital Functionality
-        
+    
         try {
 
             const userHosp = await req.body;
-            console.log(userHosp);
 
             Hosp.find({'hospname': userHosp.hospital},{'dept.deptname':1}, function (err, hosp) {
 
@@ -101,6 +74,8 @@ module.exports = function (app, passport) {
         
     });
 
+
+
     // Department Search Route
 
     app.post('/department', async function (req, res) {
@@ -118,7 +93,6 @@ module.exports = function (app, passport) {
 
                 const doctors = hosp;
                 res.send(doctors);
-                console.log(doctors);
 
             });
 
@@ -133,6 +107,8 @@ module.exports = function (app, passport) {
         }
 
     });
+
+
 
     // Doctor Search Route
 
@@ -166,6 +142,8 @@ module.exports = function (app, passport) {
         }
 
     });
+
+
 
     // Appointment Search Route
 
@@ -207,9 +185,11 @@ module.exports = function (app, passport) {
 
     });
 
-    // Appointment Book Route
 
-    app.post('/book', async function (req, res) {
+
+    // OTP Verify Route
+
+    app.post('/mobotp', async function (req, res) {
         
         // @TODO: Appointment Date Search Functionality
         try {
@@ -221,6 +201,7 @@ module.exports = function (app, passport) {
                 doctor: userHosp.doc,
                 dept: userHosp.dept,
                 time: userHosp.time,
+                mobNo: userHosp.mobno,
                 verified: userHosp.verified,
                 otp: otp(options)
 
@@ -250,7 +231,9 @@ module.exports = function (app, passport) {
 
     });
 
-    // OTP Book Route
+
+
+    // OTP Confirmed Route
 
     app.post('/otp', async function (req, res) {
         
@@ -265,7 +248,8 @@ module.exports = function (app, passport) {
                 dept: userHosp.dept,
                 time: userHosp.time,
                 verified: userHosp.verified,
-                otp: userHosp.otp
+                otp: userHosp.otp,
+                date: userHosp.date
 
             }
 
@@ -285,11 +269,11 @@ module.exports = function (app, passport) {
                 error: "Booking Not Successful"
                 
             });
-            console.log(err);
-
         }
 
     });
+
+
 
     // View Appointment Route 
 
@@ -326,6 +310,8 @@ module.exports = function (app, passport) {
 
     });
 
+
+
     // Google OAuth Route
 
     app.get('/auth/google', passport.authenticate('google', {
@@ -333,38 +319,25 @@ module.exports = function (app, passport) {
     }));
     app.get('/auth/google/callback', passport.authenticate('google', {
 
-            successRedirect: 'http://localhost:8081/home',
+            //successRedirect: 'http://localhost:8081/home',
             failureRedirect: 'http://localhost:8081'
         }
 
-    ));
+    ),function(req, res) {
 
-    // Logout Route
-
-    app.get('/logout', function (req, res) {
-
-        req.logout();
-        res.redirect('/');
+        console.log('Success');
+        userD = req.user;
+        console.log(userD.user.email);
+        console.log(req.session.passport.user);
+        res.redirect('http://localhost:8081/home');
 
     });
 
+
+
 };
 
-// Function to check if LoggedIn
 
-function isLoggedIn(req, res, next) {
-
-    if (req.isAuthenticated()) {
-
-        return next();
-
-    } else {
-
-        res.redirect('/');
-
-    }
-
-}
 
 function sms(mobno,message) {
 

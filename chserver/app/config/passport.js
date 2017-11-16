@@ -1,4 +1,3 @@
-var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var User = require('../models/user');
@@ -8,7 +7,8 @@ module.exports = function(passport) {
 
 
 	passport.serializeUser(function(user, done) {
-
+		
+		//console.log(user.id);
         done(null, user.id);
         
 	});
@@ -16,7 +16,8 @@ module.exports = function(passport) {
 	passport.deserializeUser(function(id, done) {
 
 		User.findById(id, function(err, user) {
-
+			
+			//console.log(user.id);
             done(err, user);
             
         });
@@ -34,7 +35,7 @@ module.exports = function(passport) {
 	  function(accessToken, refreshToken, profile, done) {
 
 	    	process.nextTick(function() {
-
+				
 	    		User.findOne({'user.id': profile.id}, function(err, user) {
 
 	    			if (err) {
@@ -62,11 +63,11 @@ module.exports = function(passport) {
 
                                  throw err;
                             }
-
-	    					return done(null, newUser);
+							//console.log(newUser);
+							return done(null, newUser);
+				
                         });
                         
-	    				console.log(profile);
                     }
                     
                 });

@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import BookingService from '@/services/BookingService'
 import MadButton from '@/components/MadButton'
 import FormInput from '@/components/FormInput'
 
@@ -25,7 +26,8 @@ export default {
     return {
       value: null,
       Msg: 'Submit',
-      valid: false
+      valid: false,
+      book: null
     }
   },
   components: {
@@ -43,6 +45,18 @@ export default {
       } else {
         this.value = null
         this.valid = true
+      }
+    }
+  },
+  computed: {
+    searchosp: async function () {
+      try {
+        this.book = (await BookingService.mobileotp({
+          hospital: this.message
+        })).data
+      } catch (error) {
+        // console.log(error)
+        this.error = error.response.data.error
       }
     }
   }

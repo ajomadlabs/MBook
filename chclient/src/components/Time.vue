@@ -132,11 +132,12 @@ export default {
       return this.$store.getters.getDate
     },
     tokenCurr: function () {
-      return this.$store.getters.getToken
+      return this.$store.getters.getRandomToken
     }
   },
   methods: {
     load: function () {
+      this.$store.commit('setToken', tokenCurr)
       this.$router.push({path: '/enternumber'})
     }
   }

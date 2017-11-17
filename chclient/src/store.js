@@ -19,7 +19,8 @@ export default new Vuex.Store({
     selectedMonth: null,
     selectedYear: null,
     token: null,
-    number: null
+    number: null,
+    selectToken: null
   },
   getters: {
     getName: function (state) {
@@ -61,9 +62,13 @@ export default new Vuex.Store({
     getTotalToken: function (state) {
       return state.token
     },
-    getToken: function (state) {
+    getRandomToken: function (state) {
       // console.log(state.token)
       return parseInt(Math.ceil(Math.random() * (state.token - 1) + 1))
+    },
+    getToken: function (state) {
+      // console.log(state.token)
+      return state.selectToken
     },
     getNumber: function (state) {
       return state.number
@@ -115,6 +120,9 @@ export default new Vuex.Store({
     setNumber: function (state, number) {
       state.number = number
       console.log(number)
+    },
+    setToken: function(state, token) {
+      state.selectToken = token
     }
   },
   actions: {

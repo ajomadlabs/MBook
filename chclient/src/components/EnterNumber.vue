@@ -49,10 +49,38 @@ export default {
     }
   },
   computed: {
-    searchosp: async function () {
+    hospital: function () {
+      return this.$store.getters.getHospName
+    },
+    doctor: function () {
+      return this.$store.getters.getSelectedDoctor
+    },
+    dept: function () {
+      return this.$store.getters.getSelectDept
+    },
+    token: function () {
+      return this.$store.getters.getToken
+    },
+    mobNo: function () {
+      return this.$store.getters.getNumber
+    },
+    year: function () {
+      return this.$store.getters.getYear
+    },
+    month: function () {
+      return this.$store.getters.getMonth
+    },
+    day: function () {
+      return this.$store.getters.getDay
+    },
+    date: function () {
+      return this.$store.getters.getDate
+    },
+    bookAppoint: async function () {
+      
       try {
         this.book = (await BookingService.mobileotp({
-          hospital: this.message
+          hosp
         })).data
       } catch (error) {
         // console.log(error)

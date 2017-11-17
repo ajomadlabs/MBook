@@ -15,7 +15,6 @@ const userSchema = mongoose.Schema({
             hospname: String,
             doctor: String,
             dept: String,
-            time: String,
             mobNo: Number,
             verified: false,
             otp: Number,
@@ -28,7 +27,7 @@ const userSchema = mongoose.Schema({
             hospname: String,
             doctor: String,
             dept: String,
-            time: String,
+            token: Number,
             date: Date
 
         }]

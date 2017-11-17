@@ -200,9 +200,10 @@ module.exports = function (app, passport) {
                 hospname: userHosp.hosp,
                 doctor: userHosp.doc,
                 dept: userHosp.dept,
-                time: userHosp.time,
+                token: userHosp.token,
                 mobNo: userHosp.mobno,
                 date: userHosp.date,
+                verified: userHosp.verified,
                 otp: otp(options)
 
             }
@@ -246,16 +247,16 @@ module.exports = function (app, passport) {
                 hospname: userHosp.hosp,
                 doctor: userHosp.doc,
                 dept: userHosp.dept,
-                time: userHosp.time,
-                verified: userHosp.verified,
+                token: userHosp.token,
                 otp: userHosp.otp,
+                verified:false,
                 date: userHosp.date
 
             }
 
             //console.log(appointBook);
             
-            User.update({"user.email":userHosp.email, "user.curappoint.otp":userHosp.otp},{"$set":{"user.curappoint.$.verified":true}},function(err, user){
+            User.update({"user.email":userD.user.email, "user.curappoint.otp":userHosp.otp},{"$set":{"user.curappoint.$.verified":true}},function(err, user){
 
                 res.send(user);
                 console.log("Successful");

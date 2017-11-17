@@ -20,6 +20,6 @@ export default {
     return Api().post('/mobotp', userdata)
   },
   otpverify (userdata) {
-    return Api().post('/mobotp', userdata)
+    return Api().post('/otp', userdata)
   }
 }

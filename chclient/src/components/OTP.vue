@@ -4,10 +4,10 @@
             <div class="row">
                 <p class="heading">Enter the OTP</p>
                 <form>
-                    <input type="text">
+                    <input type="text" v-model="otpno">
                     <a class="lato yellow spc-link"> resend otp </a>
                     <br/>
-                    <div v-on:click="bookConfirm">
+                    <div v-on:click="loadNumber">
                       <MadButton v-bind:msg="Msg"></MadButton>
                     </div>
                 </form>
@@ -27,7 +27,7 @@ export default {
     return {
       textOne: 'text',
       nameOne: 'asname',
-      otpno: 0,
+      otpno: null,
       Msg: 'Submit',
       book: null
     }
@@ -37,6 +37,10 @@ export default {
     FormInput
   },
   methods: {
+    loadNumber: function () {
+      this.bookConfirm()
+      this.$router.push({path: '/home'})
+    },
     bookConfirm: async function () {
       console.log('Hi')
       try {
@@ -52,6 +56,11 @@ export default {
           date: this.date,
           otp: this.otpno
         })).data
+        //   this.book = data.data
+        //   console.log('Hello')
+        //   console.log(this.book)
+        //   // this.$router.push({path: '/home'})
+        // })
       } catch (error) {
         console.log(error)
         console.log('Sorry')

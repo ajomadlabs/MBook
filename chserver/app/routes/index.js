@@ -205,7 +205,7 @@ module.exports = function (app, passport) {
                 mobNo: userHosp.mobno,
                 year: userHosp.year,
                 month: userHosp.month,
-                date: userHosp.date,
+                day: userHosp.day,
                 verified: userHosp.verified,
                 otp: otp(options)
 
@@ -254,8 +254,8 @@ module.exports = function (app, passport) {
                 token: userHosp.token,
                 year: userHosp.year,
                 month: userHosp.month,
-                date: userHosp.date,
-                otp: userHosp.otp,
+                day: userHosp.day,
+                otp: userHosp.otp,  
 
             }
 

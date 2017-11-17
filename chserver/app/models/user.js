@@ -30,7 +30,9 @@ const userSchema = mongoose.Schema({
             doctor: String,
             dept: String,
             token: Number,
-            date: Date
+            year: Number,
+            month: Number,
+            day: Number
 
         }]
                 

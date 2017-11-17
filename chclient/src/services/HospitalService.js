@@ -15,5 +15,8 @@ export default {
   },
   doctor (userdata) {
     return Api().post('/department', userdata)
+  },
+  mobileotp (userdata) {
+    return Api().post('/mobotp', userdata)
   }
 }

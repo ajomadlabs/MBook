@@ -18,7 +18,9 @@ const userSchema = mongoose.Schema({
             mobNo: Number,
             verified: false,
             otp: Number,
-            date: Date,
+            year: Number,
+            month: Number,
+            day: Number,
             token: Number
         
         }],

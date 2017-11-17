@@ -121,7 +121,7 @@ export default new Vuex.Store({
       state.number = number
       console.log(number)
     },
-    setToken: function(state, token) {
+    setToken: function (state, token) {
       state.selectToken = token
     }
   },

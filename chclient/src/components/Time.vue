@@ -137,7 +137,7 @@ export default {
   },
   methods: {
     load: function () {
-      this.$store.commit('setToken', tokenCurr)
+      this.$store.commit('setToken', this.tokenCurr)
       this.$router.push({path: '/enternumber'})
     }
   }

@@ -192,6 +192,7 @@ module.exports = function (app, passport) {
     app.post('/mobotp', async function (req, res) {
         
         // @TODO: Appointment Date Search Functionality
+        console.log('Ok')
         try {
             
             const userHosp = await req.body;
@@ -202,12 +203,15 @@ module.exports = function (app, passport) {
                 dept: userHosp.dept,
                 token: userHosp.token,
                 mobNo: userHosp.mobno,
+                year: userHosp.year,
+                month: userHosp.month,
                 date: userHosp.date,
                 verified: userHosp.verified,
                 otp: otp(options)
 
             }
 
+            console.log('Entered')
             sms(appointBook.mobNo,appointBook.otp);
 
             //console.log(appointBook);
@@ -248,8 +252,10 @@ module.exports = function (app, passport) {
                 doctor: userHosp.doc,
                 dept: userHosp.dept,
                 token: userHosp.token,
+                year: userHosp.year,
+                month: userHosp.month,
+                date: userHosp.date,
                 otp: userHosp.otp,
-                verified:false,
                 date: userHosp.date
 
             }

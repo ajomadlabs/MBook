@@ -256,7 +256,6 @@ module.exports = function (app, passport) {
                 month: userHosp.month,
                 date: userHosp.date,
                 otp: userHosp.otp,
-                date: userHosp.date
 
             }
 

@@ -18,5 +18,8 @@ export default {
   },
   mobileotp (userdata) {
     return Api().post('/mobotp', userdata)
+  },
+  otpverify (userdata) {
+    return Api().post('/mobotp', userdata)
   }
 }

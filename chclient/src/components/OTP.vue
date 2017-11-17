@@ -2,6 +2,7 @@
     <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="container-fluid">
             <div class="row">
+                <p class="heading">Enter the OTP</p>
                 <form>
                     <input type="text">
                     <a class="lato yellow spc-link"> resend otp </a>
@@ -34,6 +35,14 @@ export default {
 </script>
 
 <style scoped>
+.heading {
+  font-weight: 300;
+  font-family: "Lato", sans-serif;
+  font-size: 4.5rem;
+  padding-top: 10%;
+  text-align: center;
+}
+
 input,
 select {
   width: 100%;
@@ -56,7 +65,7 @@ form{
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    top: 40vh;
+    top: 15vh;
 }
 
 a:hover{

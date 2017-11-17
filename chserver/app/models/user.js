@@ -22,18 +22,6 @@ const userSchema = mongoose.Schema({
             month: Number,
             day: Number,
             token: Number
-        
-        }],
-        preappoint: [{
-
-            hospname: String,
-            doctor: String,
-            dept: String,
-            token: Number,
-            year: Number,
-            month: Number,
-            day: Number
-
         }]
                 
     }

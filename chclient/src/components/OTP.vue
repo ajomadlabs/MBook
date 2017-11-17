@@ -56,11 +56,6 @@ export default {
           date: this.date,
           otp: this.otpno
         })).data
-        //   this.book = data.data
-        //   console.log('Hello')
-        //   console.log(this.book)
-        //   // this.$router.push({path: '/home'})
-        // })
       } catch (error) {
         console.log(error)
         console.log('Sorry')

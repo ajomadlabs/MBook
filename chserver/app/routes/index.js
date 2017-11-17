@@ -205,7 +205,7 @@ module.exports = function (app, passport) {
                 mobNo: userHosp.mobno,
                 year: userHosp.year,
                 month: userHosp.month,
-                day: userHosp.day,
+                day: userHosp.date,
                 verified: userHosp.verified,
                 otp: otp(options)
 
@@ -254,7 +254,7 @@ module.exports = function (app, passport) {
                 token: userHosp.token,
                 year: userHosp.year,
                 month: userHosp.month,
-                day: userHosp.day,
+                day: userHosp.date,
                 otp: userHosp.otp,  
 
             }
@@ -290,12 +290,11 @@ module.exports = function (app, passport) {
 
             const userHosp = await req.body;
 
-            User.findOne({"user.email":userHosp.email}, function(err, user) {
+            User.findOne({"user.email":userD.user.email}, function(err, user) {
 
                 const appointbooks = {
 
-                    current: user.user.curappoint,
-                    previous:user.user.preappoint
+                    current: user.user.curappoint
 
                 }
 

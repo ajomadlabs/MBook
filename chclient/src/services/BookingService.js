@@ -7,7 +7,7 @@ import Api from '@/services/Api.js'
 // Making it exportable
 
 export default {
-  mobileotp (userdata) {
-    return Api().post('/mobotp', userdata)
+  bookingDetails (userdata) {
+    return Api().post('/view', userdata)
   }
 }

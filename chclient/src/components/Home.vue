@@ -3,9 +3,9 @@
         <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
           <div class="row">
             <div class="container-fluid">
-              <router-link to="/history"><div class="left">
-                <a class="white lato">View Bookings</a>
-              </div></router-link>
+              <div class="left">
+                <a class="white lato" v-on:click="loadAppoints">View Bookings</a>
+              </div>
             </div>
           </div>
         </div>
@@ -22,10 +22,56 @@
 </template>
 
 <script>
+import BookingService from '@/services/BookingService'
 export default {
   name: 'Welcome',
   data () {
-    return {}
+    return {
+      viewDetails: null,
+      /* Bookings
+      This variable will contain all the bookings in the following manner
+      hospname -> Hospital Name
+      doctor -> Doctors Name
+      dept -> Department Name
+      token -> User Token Number
+      day -> Day
+      month -> Month
+      year -> Year
+
+      Example of Accessing any fields
+      this.bookings[0].hospname  --> Gives the First Bookings Hospital Name
+      this.bookings[1].hospname  --> Gives the Second Bookings Hospital Name
+      */
+      bookings: []
+    }
+  },
+  methods: {
+    loadAppoints: function () {
+      this.viewAppoint()
+      // this.$router.push({path: '/history'})
+    },
+    viewAppoint: async function () {
+      try {
+        this.viewDetails = (await BookingService.bookingDetails({
+          verified: true
+        })).data
+        for (var i = 0; i < this.viewDetails.current.length; i++) {
+          this.bookings[i] = {
+            hospname: this.viewDetails.current[i].hospname,
+            doctor: this.viewDetails.current[i].doctor,
+            dept: this.viewDetails.current[i].dept,
+            token: this.viewDetails.current[i].token,
+            day: this.viewDetails.current[i].day,
+            month: this.viewDetails.current[i].month,
+            year: this.viewDetails.current[i].year
+          }
+        }
+        // console.log(this.bookings)
+      } catch (error) {
+        // console.log(error)
+        this.error = error.response.data.error
+      }
+    }
   }
 }
 </script>
@@ -71,6 +117,7 @@ a{
 }
 
 .left > a {
+  margin-left: 25%;
   transition: all   s ease;
 }
 

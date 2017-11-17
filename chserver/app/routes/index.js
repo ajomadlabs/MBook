@@ -202,16 +202,16 @@ module.exports = function (app, passport) {
                 dept: userHosp.dept,
                 time: userHosp.time,
                 mobNo: userHosp.mobno,
-                verified: userHosp.verified,
+                date: userHosp.date,
                 otp: otp(options)
 
             }
 
-            sms(8086699507,appointBook.otp);
+            sms(appointBook.mobNo,appointBook.otp);
 
             //console.log(appointBook);
             
-            User.update({"user.email":userHosp.email},{"$push":{"user.curappoint":appointBook}},function(err, user){
+            User.update({"user.email":userD.user.email},{"$push":{"user.curappoint":appointBook}},function(err, user){
 
                 res.send(user);
                 console.log("Successful");

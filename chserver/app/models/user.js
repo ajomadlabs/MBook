@@ -19,7 +19,8 @@ const userSchema = mongoose.Schema({
             mobNo: Number,
             verified: false,
             otp: Number,
-            date: Date
+            date: Date,
+            token: Number
         
         }],
         preappoint: [{

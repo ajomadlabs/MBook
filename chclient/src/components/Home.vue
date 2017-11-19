@@ -66,8 +66,11 @@ export default {
             year: this.viewDetails.current[i].year
           }
         }
-        console.log(this.bookings)
+        // console.log(this.bookings)
         this.$store.commit('setBookingList', this.bookings)
+        this.$store.commit('setBookingList', this.bookings)
+        this.$store.commit('setName', this.viewDetails.name)
+        this.$store.commit('setEmail', this.viewDetails.email)
       } catch (error) {
         // console.log(error)
         this.error = error.response.data.error

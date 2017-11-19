@@ -87,7 +87,7 @@ export default new Vuex.Store({
       state.name = name
     },
     setEmail: function (state, email) {
-      state.email = name
+      state.email = email
     },
     setBookings: function (state, bookings) {
       state.bookings = bookings

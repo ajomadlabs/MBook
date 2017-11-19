@@ -48,6 +48,22 @@ export default {
     }
   },
   methods: {
+    clickHand: function () {
+      var m = document.querySelector('label')
+      var n = document.querySelector('input')
+      m.classList.add('focuslabel')
+      n.classList.add('focusText')
+    },
+    changeHandler: function () {
+      var m = document.querySelector('label')
+      var n = document.querySelector('input')
+      if (this.message.length === 0) {
+        n.classList.remove('focusText')
+        m.classList.remove('focuslabel')
+      } else {
+        m.classList.remove('focusText')
+      }
+    },
     hosp: async function (nameSelect) {
       this.name = nameSelect
       try {

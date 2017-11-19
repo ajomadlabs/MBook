@@ -48,7 +48,7 @@ export default {
   methods: {
     loadAppoints: function () {
       this.viewAppoint()
-      // this.$router.push({path: '/history'})
+      this.$router.push({path: '/history'})
     },
     viewAppoint: async function () {
       try {
@@ -67,6 +67,7 @@ export default {
           }
         }
         console.log(this.bookings)
+        this.$store.commit('setBookingList', this.bookings)
       } catch (error) {
         // console.log(error)
         this.error = error.response.data.error

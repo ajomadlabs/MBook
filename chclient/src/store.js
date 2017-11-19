@@ -20,9 +20,13 @@ export default new Vuex.Store({
     selectedYear: null,
     token: null,
     number: null,
-    selectToken: null
+    selectToken: null,
+    bookingList: null
   },
   getters: {
+    getBookingList: function (state) {
+      return state.bookingList
+    },
     getName: function (state) {
       return state.name
     },
@@ -75,6 +79,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setBookingList: function (state, list) {
+      state.bookingList = list
+      console.log(list)
+    },
     setName: function (state, name) {
       state.name = name
     },

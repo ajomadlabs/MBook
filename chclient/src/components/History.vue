@@ -19,8 +19,8 @@
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="card-holder">
-                        <li class="card-current" v-for="book in bookings" v-if="book.active"> <div class="text-current">{{ book.name }} </div> <div class="text-under-current">{{ book.timing }}</div> <div class="text-under-under-current"><a class="cancel">Cancel</a></div></li>
-                        <li class="card-history" v-for="book in bookings" v-if="!book.active"> <div class="text-history">{{ book.name }} </div> <div class="text-under-history">{{ book.timing }}</div></li>
+                        <li class="card-current" v-for="book in bookings"> <div class="text-current">{{ book.hospname }} </div> <div class="text-under-current">{{ book.doctor }}</div> <div class="text-under-under-current"><a class="cancel">Cancel</a></div></li>
+                        <!--<li class="card-history" v-for="book in bookings" v-if="!book.active"> <div class="text-history">{{ book.name }} </div> <div class="text-under-history">{{ book.timing }}</div></li>-->
                     </ul>
                 </div>
             </div>
@@ -68,7 +68,7 @@
         return this.$store.getters.getEmail
       },
       bookings: function () {
-        return this.$store.getters.getBookings
+        return this.$store.getters.getBookingList
       }
     }
   }

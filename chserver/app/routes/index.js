@@ -359,11 +359,11 @@ module.exports = function (app, passport) {
 
     ),function(req, res) {
 
-        console.log('Success');
+        // console.log('Success');
         userD = req.user;
-        console.log(userD.user.email);
-        console.log(req.session.passport.user);
-        res.redirect('http://carehack.azurewebsites.net/home');
+        // console.log(userD.user.email);
+        // console.log(req.session.passport.user);
+        res.redirect('http://carehack-api.azurewebsites.net/home');
 
     });
 

@@ -40,7 +40,7 @@ export default {
       Msg: 'Search',
       val: null,
       message: null,
-      text: 'Enter Hospital\'s name or Doctor\'s name',
+      text: 'Enter Hospital\'s name ',
       hospitallist: null,
       name: null,
       nameHosp: null,

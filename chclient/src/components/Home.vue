@@ -66,7 +66,7 @@ export default {
             year: this.viewDetails.current[i].year
           }
         }
-        // console.log(this.bookings)
+        console.log(this.bookings)
       } catch (error) {
         // console.log(error)
         this.error = error.response.data.error

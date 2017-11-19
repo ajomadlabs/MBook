@@ -363,7 +363,7 @@ module.exports = function (app, passport) {
         userD = req.user;
         // console.log(userD.user.email);
         // console.log(req.session.passport.user);
-        res.redirect('http://carehack.azurewebsites.net/');
+        res.redirect('http://carehack.azurewebsites.net/home');
 
     });
 

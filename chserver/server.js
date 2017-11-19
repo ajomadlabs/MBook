@@ -15,7 +15,7 @@ const app = express();
 
 // Defining the port 
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 
 // Defining the middlewares
 

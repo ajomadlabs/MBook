@@ -39,7 +39,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
 
     });
@@ -73,7 +73,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
         
     });
@@ -111,7 +111,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
 
     });
@@ -151,7 +151,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
 
     });
@@ -198,7 +198,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
 
     });
@@ -250,7 +250,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
 
     });
@@ -298,7 +298,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
 
     });
@@ -339,7 +339,7 @@ module.exports = function (app, passport) {
             }
         }
         else {
-            res.redirect('http://localhost:8081/');
+            res.redirect('http://carehack.azurewebsites.net/');
         }
 
     });
@@ -354,7 +354,7 @@ module.exports = function (app, passport) {
     app.get('/auth/google/callback', passport.authenticate('google', {
 
             //successRedirect: 'http://localhost:8081/home',
-            failureRedirect: 'http://localhost:8081'
+            failureRedirect: 'http://carehack.azurewebsites.net/'
         }
 
     ),function(req, res) {
@@ -363,7 +363,7 @@ module.exports = function (app, passport) {
         userD = req.user;
         console.log(userD.user.email);
         console.log(req.session.passport.user);
-        res.redirect('http://localhost:8081/home');
+        res.redirect('http://carehack.azurewebsites.net/home');
 
     });
 

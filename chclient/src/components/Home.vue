@@ -50,6 +50,14 @@ export default {
       this.viewAppoint()
       this.$router.push({path: '/history'})
     },
+    loadDate: function () {
+      var q = new Date()
+      var m = q.getMonth()
+      var d = q.getDate()
+      var y = q.getFullYear()
+      var date = new Date(y, m, d)
+      return date
+    },
     viewAppoint: async function () {
       try {
         this.viewDetails = (await BookingService.bookingDetails({
@@ -63,7 +71,16 @@ export default {
             token: this.viewDetails.current[i].token,
             day: this.viewDetails.current[i].day,
             month: this.viewDetails.current[i].month,
-            year: this.viewDetails.current[i].year
+            year: this.viewDetails.current[i].year,
+            date: '',
+            active: true
+          }
+          this.bookings[i].date = this.bookings[i].year + '-' + this.bookings[i].month + '-' + this.bookings[i].day
+          this.bookings[i].date = new Date(this.bookings[i].date)
+          if (this.bookings[i].date > this.loadDate()) {
+            this.bookings[i].active = true
+          } else {
+            this.bookings[i].active = false
           }
         }
         // console.log(this.bookings)

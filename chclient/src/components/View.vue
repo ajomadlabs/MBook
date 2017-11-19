@@ -5,7 +5,7 @@
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <p class="hosp-name lato primary-color">{{ user }}</p>
                     <br />
-                    <p class="dept-name lato primary-color">{{ number }}</p>
+                    <p class="dept-name lato primary-color">{{ email }}</p>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
                    <div class="info-box lato">
                         <p class="info-box-font">Hospital - {{ hospital }}</p>
                         <p class="info-box-font">Doctor - {{ name }}</p>
-                        <p class="info-box-font">Timing - {{ timing }}</p>
+                        <p class="info-box-font">Date - {{ dat }}</p>
                         <p class="info-box-font">Department - {{ dept }}</p>
                         <div v-if="active">
                             <div class="box">
@@ -42,15 +42,21 @@
     },
     data () {
       return {
-        user: 'Ajo Kundi',
-        number: '+91 8281408069',
         Book: 'Book',
         Cancel: 'Cancel',
-        name: 'Dr. Doctor',
-        hospital: 'Aster',
-        timing: 'MBBS ........sa',
-        active: true,
-        dept: 'Oncology'
+        name: this.$store.getters.getselectedBooking.doc,
+        hospital: this.$store.getters.getselectedBooking.hos,
+        dat: this.$store.getters.getselectedBooking.dat,
+        dept: this.$store.getters.getselectedBooking.dep,
+        tok: this.$store.getters.getselectedBooking.tok
+      }
+    },
+    computed: {
+      user: function () {
+        return this.$store.getters.getName
+      },
+      email: function () {
+        return this.$store.getters.getEmail
       }
     }
   }

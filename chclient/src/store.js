@@ -21,9 +21,13 @@ export default new Vuex.Store({
     token: null,
     number: null,
     selectToken: null,
-    bookingList: null
+    bookingList: null,
+    selectedBooking: null
   },
   getters: {
+    getselectedBooking: function (state) {
+      return state.selectedBooking
+    },
     getBookingList: function (state) {
       return state.bookingList
     },
@@ -79,9 +83,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setSelectedBooking: function (state, list) {
+      state.selectedBooking = list
+    },
     setBookingList: function (state, list) {
       state.bookingList = list
-      console.log(list)
     },
     setName: function (state, name) {
       state.name = name

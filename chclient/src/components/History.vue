@@ -19,8 +19,8 @@
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="card-holder">
-                        <li class="card-current" v-for="book in bookings"> <div class="text-current">{{ book.hospname }} </div> <div class="text-under-current">{{ book.doctor }}</div> <div class="text-under-under-current"><a class="cancel">Cancel</a></div></li>
-                        <!--<li class="card-history" v-for="book in bookings" v-if="!book.active"> <div class="text-history">{{ book.name }} </div> <div class="text-under-history">{{ book.timing }}</div></li>-->
+                        <li class="card-current" v-for="book in bookings" v-if="!book.active"> <div class="text-current">{{ book.hospname }} </div> <div class="text-under-current">{{ book.doctor }}</div> <div class="text-under-under-current"><a class="cancel">Cancel</a></div></li>
+                        <li class="card-history" v-for="book in bookings" v-if="!book.active"> <div class="text-history">{{ book.hospname }} </div> <div class="text-under-history">{{ book.doctor }}</div></li>
                     </ul>
                 </div>
             </div>

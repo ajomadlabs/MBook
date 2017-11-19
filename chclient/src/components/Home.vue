@@ -28,20 +28,6 @@ export default {
   data () {
     return {
       viewDetails: null,
-      /* Bookings
-      This variable will contain all the bookings in the following manner
-      hospname -> Hospital Name
-      doctor -> Doctors Name
-      dept -> Department Name
-      token -> User Token Number
-      day -> Day
-      month -> Month
-      year -> Year
-
-      Example of Accessing any fields
-      this.bookings[0].hospname  --> Gives the First Bookings Hospital Name
-      this.bookings[1].hospname  --> Gives the Second Bookings Hospital Name
-      */
       bookings: []
     }
   },

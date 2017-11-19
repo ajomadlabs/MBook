@@ -5,7 +5,7 @@
               <form v-on:submit.prevent>
                   <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <div class="input-field">
-                          <input v-model="message" type="text" name="search" id="field" class="inputText" />
+                          <input v-model="message" type="text"  name="search" id="field" v-on:click="clickHand" v-on:change="changeHandler" class="inputText" />
                           <label for="field">{{ text }}</label>
                       </div>
                       <div class="mb" v-on:click="searchosp" v-on:keyup.enter="searchosp">
@@ -126,14 +126,19 @@ input {
     color: #3b2577;
 }
 
-input:focus {
-  border-color: #ffcc00;
-}
-input:focus~label {
-  top: 0px;
-  color: #ffcc00;
-  font-size: 1em;
-}
+.focusText {
+   border-color: #ffcc00;
+   border-color: #ffcc00;
+ }
+
+.focuslabel {
+   top: 0px;
+   top: 0px;
+   color: #ffcc00;
+   color: #ffcc00;
+   font-size: 1em;
+   font-size: 1em;
+ }
 
 .fluidblock{
     display: block;

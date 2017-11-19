@@ -8,7 +8,7 @@
                     <p class="dept-name lato primary-color">{{ email }}</p>
                     <br />
                     <div class="bp">
-                     <router-link to="/hospitals"><MadButton v-bind:msg="Book"></MadButton></router-link>
+                     <router-link to="/home"><MadButton v-bind:msg="Book"></MadButton></router-link>
                     </div>
                     <br />
                 </div>
@@ -39,25 +39,8 @@
     },
     data () {
       return {
-        Book: 'Book',
+        Book: 'Home',
         Cancel: 'Cancel'
-        /* bookings: [
-          {
-            name: 'Dr. Varma',
-            timing: 'MBBS ........sa',
-            active: false
-          },
-          {
-            name: 'Dr. Doctor',
-            timing: 'MBBS ........sa',
-            active: true
-          },
-          {
-            name: 'Dr. Blah',
-            timing: 'MBBS ........sa',
-            active: false
-          }
-        ] */
       }
     },
     computed: {

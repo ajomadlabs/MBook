@@ -6,6 +6,6 @@ import axios from 'axios'
 // Making it exportable
 export default () => {
   return axios.create({
-    baseURL: `http://localhost:8080/`
+    baseURL: `http://carehack-api.azurewebsites.net/`
   })
 }

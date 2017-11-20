@@ -343,7 +343,38 @@ module.exports = function (app, passport) {
         }
 
     });
+    
+    // Cancel Appointment Route 
 
+    app.post('/cancel', async function (req, res) {
+        
+        // @TODO: Cancel Appointment Functionality
+        if (userD != "") {
+            try {
+                const userHosp = await req.body;
+                console.log(userHosp.id)
+                User.update({"user.email":userD.user.email, "user.curappoint._id":userHosp.id},{"$pull":{"user.curappoint":{"_id":userHosp.id}}}, function(err, user) {
+
+                    res.send(true);
+                    //console.log(user);
+
+                });
+
+            } catch (err) {
+
+                res.status(400).send({
+                    
+                    error: "Something went wrong"
+                    
+                });
+
+            }
+        }
+        else {
+            // res.redirect('http://localhost:8081/');
+        }
+
+    });
 
 
     // Google OAuth Route

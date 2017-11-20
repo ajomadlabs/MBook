@@ -6,6 +6,10 @@
                     <p class="hosp-name lato primary-color">{{ user }}</p>
                     <br />
                     <p class="dept-name lato primary-color">{{ email }}</p>
+                    <div class="bp">
+                     <router-link to="/history"><MadButton v-bind:msg="Book"></MadButton></router-link>
+                    </div>
+                    <br />
                 </div>
             </div>
         </div>
@@ -42,7 +46,7 @@
     },
     data () {
       return {
-        Book: 'Book',
+        Book: 'Back',
         Cancel: 'Cancel',
         name: this.$store.getters.getselectedBooking.doc,
         hospital: this.$store.getters.getselectedBooking.hos,
@@ -70,6 +74,13 @@
 
 .info-box-font{
     font-size: 2em;
+}
+
+.bp{
+    display: inline-block;
+    position: absolute;
+    right: 40px;
+    top: 45px;
 }
 
 .my-btn{

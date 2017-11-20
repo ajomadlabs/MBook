@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     login () {
-      window.location = 'http://carehack-api.azurewebsites.net/auth/google'
+      window.location = 'http://localhost:8080/auth/google'
     }
   }
 }

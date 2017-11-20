@@ -5,7 +5,6 @@
               <form v-on:submit.prevent>
                   <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <div class="input-field">
-                          <!--Made A Change-->
                           <input v-model="message" type="text"  name="search" id="field" v-on:click="clickHand" v-on:change="changeHandler" class="inputText" />
                           <label for="field">{{ text }}</label>
                       </div>
@@ -41,8 +40,7 @@ export default {
       Msg: 'Search',
       val: null,
       message: null,
-      // Made A Change
-      text: 'Enter Hospital\'s name',
+      text: 'Enter Hospital\'s name ',
       hospitallist: null,
       name: null,
       nameHosp: null,
@@ -50,7 +48,6 @@ export default {
     }
   },
   methods: {
-    // Made A Change
     clickHand: function () {
       var m = document.querySelector('label')
       var n = document.querySelector('input')
@@ -144,7 +141,7 @@ input {
 .primary-color{
     color: #3b2577;
 }
-/* Made A Change */
+
 .focusText {
    border-color: #ffcc00;
    border-color: #ffcc00;

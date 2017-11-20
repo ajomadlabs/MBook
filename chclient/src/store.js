@@ -88,12 +88,10 @@ export default new Vuex.Store({
     },
     setBookingList: function (state, list) {
       state.bookingList = list
-      // console.log(list)
     },
     setName: function (state, name) {
       state.name = name
     },
-    // Made A Change
     setEmail: function (state, email) {
       state.email = email
     },

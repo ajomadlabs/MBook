@@ -79,29 +79,29 @@ export default {
       this.dayWord = 'Friday'
     }
 
-    if (this.month === 1) {
+    if (this.month === 0) {
       this.monthWord = 'January'
-    } else if (this.month === 2) {
+    } else if (this.month === 1) {
       this.monthWord = 'February'
-    } else if (this.month === 3) {
+    } else if (this.month === 2) {
       this.monthWord = 'March'
-    } else if (this.month === 4) {
+    } else if (this.month === 3) {
       this.monthWord = 'April'
-    } else if (this.month === 5) {
+    } else if (this.month === 4) {
       this.monthWord = 'May'
-    } else if (this.month === 6) {
+    } else if (this.month === 5) {
       this.monthWord = 'June'
-    } else if (this.month === 7) {
+    } else if (this.month === 6) {
       this.monthWord = 'July'
-    } else if (this.month === 8) {
+    } else if (this.month === 7) {
       this.monthWord = 'August'
-    } else if (this.month === 9) {
+    } else if (this.month === 8) {
       this.monthWord = 'September'
-    } else if (this.month === 10) {
+    } else if (this.month === 9) {
       this.monthWord = 'October'
-    } else if (this.month === 11) {
+    } else if (this.month === 10) {
       this.monthWord = 'November'
-    } else if (this.month === 12) {
+    } else {
       this.monthWord = 'December'
     }
     this.sentence = this.date + '  ' + this.dayWord + ',  ' + this.monthWord + ',  ' + this.years

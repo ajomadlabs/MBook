@@ -22,11 +22,8 @@
                         <p class="info-box-font">Doctor - {{ name }}</p>
                         <p class="info-box-font">Date - {{ dat }}</p>
                         <p class="info-box-font">Department - {{ dept }}</p>
-                        <div v-if="active">
-                            <div class="box">
-                                <input type="checkbox"> <label><p>i hereby accept to terms and condition</p></label>
-                            </div>
-                            <button class="my-btn" >Cancel</button>
+                        <div>
+                            <button class="my-btn" v-on:click="cancelBtn()">Cancel</button>
                         </div>
                    </div>
                 </div>
@@ -38,6 +35,7 @@
 </template>
 
 <script>
+  import BookingService from '@/services/BookingService'
   import MadButton from '@/components/MadButton'
   export default {
     name: 'View',
@@ -52,7 +50,25 @@
         hospital: this.$store.getters.getselectedBooking.hos,
         dat: this.$store.getters.getselectedBooking.dat,
         dept: this.$store.getters.getselectedBooking.dep,
-        tok: this.$store.getters.getselectedBooking.tok
+        tok: this.$store.getters.getselectedBooking.tok,
+        idn: this.$store.getters.getselectedBooking.idn
+      }
+    },
+    methods: {
+      cancelBtn: function () {
+        console.log(this.idn)
+        this.cancel()
+        // this.$router.push({path: '/history'})
+      },
+      cancel: async function () {
+        try {
+          this.cancelList = (await BookingService.cancelBooking({
+            id: this.idn
+          })).data
+          this.$router.push({path: '/history'})
+        } catch (error) {
+          this.error = error.response.data.error
+        }
       }
     },
     computed: {

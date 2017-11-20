@@ -136,7 +136,11 @@ export default {
       this.$store.commit('setDate', this.date)
       this.$store.commit('setDay', this.day + 1)
       this.$store.commit('setYear', this.year)
-      this.$store.commit('setMonth', this.month)
+      if (this.month === 12) {
+        this.$store.commit('setMonth', 1)
+      } else {
+        this.$store.commit('setMonth', this.month + 1)
+      }
       this.$router.push({path: '/timings'})
     }
   },

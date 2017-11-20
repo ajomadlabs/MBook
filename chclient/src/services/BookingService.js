@@ -9,5 +9,8 @@ import Api from '@/services/Api.js'
 export default {
   bookingDetails (userdata) {
     return Api().post('/view', userdata)
+  },
+  cancelBooking (userdata) {
+    return Api().post('/cancel', userdata)
   }
 }

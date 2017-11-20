@@ -56,7 +56,7 @@
     },
     methods: {
       cancelBtn: function () {
-        console.log(this.idn)
+        // console.log(this.idn)
         this.cancel()
         // this.$router.push({path: '/history'})
       },
@@ -65,7 +65,7 @@
           this.cancelList = (await BookingService.cancelBooking({
             id: this.idn
           })).data
-          this.$router.push({path: '/history'})
+          this.$router.push({path: '/home'})
         } catch (error) {
           this.error = error.response.data.error
         }

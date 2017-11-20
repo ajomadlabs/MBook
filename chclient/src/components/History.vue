@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <ul class="card-holder">
-                        <li class="card-current" v-for="book in bookings" v-if="book.active" v-on:click="selectBooking(book.hospname, book.doctor, book.token, book.dept, book.date, book._id)"> <div class="text-current">{{ book.hospname }} </div> <div class="text-under-current">{{ book.doctor }}</div> <div class="text-under-under-current"><a class="cancel">Cancel</a></div></li>
+                        <li class="card-current" v-for="book in bookings" v-if="book.active" v-on:click="selectBooking(book.hospname, book.doctor, book.token, book.dept, book.date, book.id)"> <div class="text-current">{{ book.hospname }} </div> <div class="text-under-current">{{ book.doctor }}</div> <div class="text-under-under-current"><a class="cancel">Cancel</a></div></li>
                         <li class="card-history" v-for="book in bookings" v-if="!book.active"> <div class="text-history">{{ book.hospname }} </div> <div class="text-under-history">{{ book.doctor }}</div></li>
                     </ul>
                 </div>
@@ -54,6 +54,7 @@
           dat: da,
           idn: id
         }
+        // console.log(this.bookingSelected[0])
         this.$store.commit('setSelectedBooking', this.bookingSelected[0])
         this.$router.push({path: '/view'})
       }

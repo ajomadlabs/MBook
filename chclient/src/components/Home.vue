@@ -59,7 +59,9 @@ export default {
             month: this.viewDetails.current[i].month,
             year: this.viewDetails.current[i].year,
             date: '',
-            active: true
+            active: true,
+            cancel: false,
+            id: this.viewDetails.current[i]._id
           }
           this.bookings[i].date = this.bookings[i].year + '-' + this.bookings[i].month + '-' + this.bookings[i].day
           this.bookings[i].date = new Date(this.bookings[i].date)
@@ -69,8 +71,11 @@ export default {
             this.bookings[i].active = false
           }
         }
-        // console.log(this.bookings)
-        this.$store.commit('setBookingList', this.bookings)
+        // console.log(this.bookings[0])
+        // console.log(this.viewDetails.name)
+        // console.log(this.viewDetails.email)
+        // console.log(this.viewDetails.current[0]._id)
+        // Made A Change
         this.$store.commit('setBookingList', this.bookings)
         this.$store.commit('setName', this.viewDetails.name)
         this.$store.commit('setEmail', this.viewDetails.email)

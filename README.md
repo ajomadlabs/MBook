@@ -79,6 +79,10 @@
 9. Run the server `npm run dev`
 10. Go to `http://localhost:8081`
 
+## Contribute
+
+[Contributing Guidelines](https://github.com/ajomadlabs/MBook/blob/master/CONTRIBUTING.md)
+
 ## Contributors
 
 - [Ashik Jose](https://github.com/ashikjose)

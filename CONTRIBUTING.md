@@ -31,3 +31,7 @@ Unsure where to begin contributing to MBook? You can start by looking through th
 * [Help wanted issues][help-wanted] - issues which should be a bit more involved than `beginner` issues.
 
 Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
+
+Thanks! :heart: 
+
+MBook Team

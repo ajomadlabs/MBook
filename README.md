@@ -1,4 +1,4 @@
-# Care Hacks [![CircleCI token](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser/master.svg?style=flat-square)]() [![AUR](https://img.shields.io/aur/license/yaourt.svg?style=flat-square)]() [![npm (scoped)](https://img.shields.io/npm/v/@cycle/core.svg?style=flat-square)]()
+# MBook [![CircleCI token](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser/master.svg?style=flat-square)]() [![AUR](https://img.shields.io/aur/license/yaourt.svg?style=flat-square)]() [![npm (scoped)](https://img.shields.io/npm/v/@cycle/core.svg?style=flat-square)]()
 
 ## Description
 
@@ -68,9 +68,9 @@
 
 ## Installation
 
-1. Create a folder Carehacks `mkdir Carehacks`
-2. Navigate to that folder `cd Carehacks`
-3. Clone this repository `git clone https://github.com/ajomadlabs/CareHack.git`
+1. Create a folder MBook `mkdir MBook`
+2. Navigate to that folder `cd MBook`
+3. Clone this repository `git clone https://github.com/ajomadlabs/MBook.git`
 4. Navigate into chclient `cd chclient`
 5. Install all the nodemodules `npm install`
 6. Run the client `npm run dev`
